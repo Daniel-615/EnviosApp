@@ -12,7 +12,7 @@ Configuración del Entorno
    python3 -m venv env
 2. Activar el Entorno Virtual
    En Windows, activa el entorno virtual con:
-   .\myenv\Scripts\Activate
+   .\env\Scripts\Activate
 3. Desactivar el Entorno Virtual
    Para desactivar el entorno virtual, simplemente ejecuta:
    deactivate
