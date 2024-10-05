@@ -1,5 +1,5 @@
 from ..models import Transportista
-class TransportistasController:
+class TransportistaController:
     @staticmethod
     def obtener_transportistas():
         return Transportista.objects.all()

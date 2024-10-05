@@ -1,7 +1,7 @@
-from ..models import Clientes
-class ClientesController():
+from ..models import Cliente
+class ClientesController:
     @staticmethod
     def obtener_clientes():
-        return Clientes.objects.all()
+        return Cliente.objects.all()
     def obtener_cliente_id(id):
-        return Clientes.objects.get(id=id)
+        return Cliente.objects.get(id=id)

@@ -1,7 +1,7 @@
 from ..models import Facturacion
-class FacturacionController():
+class FacturacionController:
     @staticmethod
     def obtener_facturacion():
-        return Facturacion.object.all()
+        return Facturacion.objects.all()
     def obtener_facturacion(id):
-        return Facturacion.object.get(id=id)
+        return Facturacion.objects.get(id=id)
