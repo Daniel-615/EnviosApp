@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="nU3Hn3_t5DXiQGIVdaak" name="Page-1">
-        <mxGraphModel dx="599" dy="270" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="1700" math="0" shadow="0">
+        <mxGraphModel dx="296" dy="100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="1700" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -100,7 +100,7 @@
                         <mxPoint x="40" y="3" as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="33" value="&lt;div style=&quot;box-sizing:border-box;width:100%;background:#e4e4e4;padding:2px;&quot;&gt;&lt;font color=&quot;#000000&quot;&gt;Ubicacion&lt;/font&gt;&lt;/div&gt;&lt;table style=&quot;width:100%;font-size:1em;&quot; cellpadding=&quot;2&quot; cellspacing=&quot;0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;PK&lt;br&gt;FK&lt;/td&gt;&lt;td&gt;id_ubicacion&lt;br&gt;id_cliente&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;td&gt;ciudad&lt;br&gt;calle&lt;br&gt;codigo postal&lt;br&gt;coordenadas_geograficas&lt;br&gt;referencias&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;fontColor=#F0F0F0;" parent="1" vertex="1">
+                <mxCell id="33" value="&lt;div style=&quot;box-sizing:border-box;width:100%;background:#e4e4e4;padding:2px;&quot;&gt;&lt;font color=&quot;#000000&quot;&gt;Ubicacion&lt;/font&gt;&lt;/div&gt;&lt;table style=&quot;width:100%;font-size:1em;&quot; cellpadding=&quot;2&quot; cellspacing=&quot;0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;PK&lt;br&gt;FK&lt;/td&gt;&lt;td&gt;id_ubicacion&lt;br&gt;id_cliente&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;td&gt;ciudad&lt;br&gt;calle&lt;br&gt;codigo postal&lt;br&gt;referencias&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;fontColor=#F0F0F0;" parent="1" vertex="1">
                     <mxGeometry x="110" y="610" width="180" height="130" as="geometry"/>
                 </mxCell>
                 <mxCell id="35" value="" style="endArrow=none;html=1;edgeStyle=orthogonalEdgeStyle;fontColor=#000000;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="33" target="4" edge="1">
@@ -167,7 +167,7 @@
                 <mxCell id="57" value="&lt;div style=&quot;box-sizing:border-box;width:100%;background:#e4e4e4;padding:2px;&quot;&gt;&lt;font color=&quot;#000000&quot;&gt;AsignacionVehiculo&lt;/font&gt;&lt;/div&gt;&lt;table style=&quot;width:100%;font-size:1em;&quot; cellpadding=&quot;2&quot; cellspacing=&quot;0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;PK&lt;/td&gt;&lt;td&gt;id_asignacion_vehiculo_transportista&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;FK1&lt;br&gt;FK2&lt;br&gt;&lt;/td&gt;&lt;td&gt;id_transportista&lt;br&gt;id_vehiculo&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;fecha_asignacion&lt;br&gt;fecha_fin_asignacion&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;" parent="1" vertex="1">
                     <mxGeometry x="390" y="770" width="230" height="110" as="geometry"/>
                 </mxCell>
-                <mxCell id="58" value="" style="endArrow=none;html=1;edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.25;exitDx=0;exitDy=0;" edge="1" parent="1" source="57">
+                <mxCell id="58" value="" style="endArrow=none;html=1;edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.25;exitDx=0;exitDy=0;" parent="1" source="57" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="380" y="310" as="sourcePoint"/>
                         <mxPoint x="340" y="270" as="targetPoint"/>
@@ -177,17 +177,17 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="59" value="parent" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;" connectable="0" vertex="1" parent="58">
+                <mxCell id="59" value="parent" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;" parent="58" connectable="0" vertex="1">
                     <mxGeometry x="-1" relative="1" as="geometry">
                         <mxPoint x="-20" y="-37" as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="60" value="child" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;" connectable="0" vertex="1" parent="58">
+                <mxCell id="60" value="child" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;" parent="58" connectable="0" vertex="1">
                     <mxGeometry x="1" relative="1" as="geometry">
                         <mxPoint x="27" y="31" as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="61" value="" style="endArrow=none;html=1;edgeStyle=orthogonalEdgeStyle;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;" edge="1" parent="1" source="38" target="57">
+                <mxCell id="61" value="" style="endArrow=none;html=1;edgeStyle=orthogonalEdgeStyle;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;" parent="1" source="38" target="57" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="170" y="820" as="sourcePoint"/>
                         <mxPoint x="330" y="820" as="targetPoint"/>
@@ -197,12 +197,12 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="62" value="parent" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;" connectable="0" vertex="1" parent="61">
+                <mxCell id="62" value="parent" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;" parent="61" connectable="0" vertex="1">
                     <mxGeometry x="-1" relative="1" as="geometry">
                         <mxPoint x="-35" as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="63" value="child" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;" connectable="0" vertex="1" parent="61">
+                <mxCell id="63" value="child" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;" parent="61" connectable="0" vertex="1">
                     <mxGeometry x="1" relative="1" as="geometry">
                         <mxPoint x="-10" y="25" as="offset"/>
                     </mxGeometry>
