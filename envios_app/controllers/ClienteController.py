@@ -1,7 +1,7 @@
 from ..models import Cliente
 from django.core.exceptions import ObjectDoesNotExist
 
-class ClientesController:
+class ClienteController:
 
     @staticmethod
     def obtener_clientes():
@@ -37,7 +37,7 @@ class ClientesController:
     def actualizar_cliente(id_cliente, datos):
         """Actualiza los datos de un cliente existente."""
         try:
-            cliente = ClientesController.obtener_cliente_id(id_cliente)
+            cliente = ClienteController.obtener_cliente_id(id_cliente)
             if cliente:
                 for key, value in datos.items():
                     if hasattr(cliente, key):
@@ -51,7 +51,7 @@ class ClientesController:
     def eliminar_cliente(id_cliente):
         """Elimina un cliente por su ID."""
         try:
-            cliente = ClientesController.obtener_cliente_id(id_cliente)
+            cliente = ClienteController.obtener_cliente_id(id_cliente)
             if cliente:
                 cliente.delete()
                 return True

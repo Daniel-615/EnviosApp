@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
-from ..controllers import VehiculoController
+from ..controllers.VehiculoController import VehiculoController
 
 # Listar vehículos
 def listar_vehiculos(request):

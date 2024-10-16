@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
-from ..controllers import AsignacionController
+from ..controllers.AsignacionController import AsignacionController
 
 # Listar todas las asignaciones
 @require_http_methods(["GET"])

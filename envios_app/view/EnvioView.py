@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
-from ..controllers import EnvioController
+from ..controllers.EnvioController import EnvioController
 
 # Listar todos los envíos
 @require_http_methods(["GET"])

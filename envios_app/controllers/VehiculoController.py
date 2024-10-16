@@ -7,13 +7,14 @@ class VehiculoController:
             return Vehiculo.objects.all()
         except Exception as e:
             print(f"Error: {e}")
-        
+    @staticmethod
     def obtener_vehiculo_id(id):
         """Obtiene un vehiculo por id"""
         try:
             return Vehiculo.objects.get(id=id)
         except Exception as e:
             print(f"Error: {e}")
+    @staticmethod
     def crear_vehiculo(matricula, marca, modelo):
         """Crea un nuevo vehiculo"""
         try:
@@ -24,7 +25,6 @@ class VehiculoController:
             )
         except Exception as e:
             print(f"Error: {e}")
-
     @staticmethod
     def actualizar_vehiculo(id, datos):
         """Actualiza su vehiculo por su ID."""
@@ -36,7 +36,6 @@ class VehiculoController:
             return vehiculo
         except Exception as e:
             print(f"Error: {e}")
-
     @staticmethod
     def eliminar_vehiculo(id):
         """Elimina un vehiculo por su ID."""

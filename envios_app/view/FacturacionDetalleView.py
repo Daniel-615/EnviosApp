@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from ..controllers import FacturacionDetalleController
+from ..controllers.FacturacionDetalleController import FacturacionDetalleController
 
 # Listar todos los detalles de facturación
 def listar_facturacion_detalle(request):

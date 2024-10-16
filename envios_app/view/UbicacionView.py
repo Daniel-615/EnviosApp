@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
-from ..controllers import UbicacionController
+from ..controllers.UbicacionController import UbicacionController
 
 # Listar todas las ubicaciones
 @require_http_methods(["GET"])

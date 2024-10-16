@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from ..controllers import TransportistaController
+from ..controllers.TransportistaController import TransportistaController
 
 # Listar transportistas
 def listar_transportistas(request):

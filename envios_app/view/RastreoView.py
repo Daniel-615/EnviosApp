@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from ..controllers import RastreoController
+from ..controllers.RastreoController import RastreoController
 
 # Listar rastreos
 def listar_rastreos(request):

@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
-from ..controllers import ClienteController
+from ..controllers.ClienteController import ClienteController
 
 # Listar todos los clientes
 @require_http_methods(["GET"])

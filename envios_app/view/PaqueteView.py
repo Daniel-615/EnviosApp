@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from ..controllers import PaqueteController
+from ..controllers.PaqueteController import PaqueteController
 
 # Listar paquetes
 def listar_paquetes(request):

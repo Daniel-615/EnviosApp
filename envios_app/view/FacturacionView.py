@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
-from ..controllers import FacturacionController
+from ..controllers.FacturacionController import FacturacionController
 
 # Listar todas las facturaciones
 @require_http_methods(["GET"])

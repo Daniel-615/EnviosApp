@@ -10,7 +10,7 @@ from .views import (
     crear_asignacion_view,
     actualizar_asignacion_view,
     eliminar_asignacion_view,
-
+    listar_cliente_view,
 )
 urlpatterns = [
     path('vehiculos/', listar_vehiculo_view, name='listar_vehiculos'),
@@ -22,5 +22,6 @@ urlpatterns = [
     path('asignaciones/<uuid:id>/',obtener_asignacion_view,name='obtener_asignacion'),
     path('asignaciones/crear',crear_asignacion_view,name='crear_asignacion'),
     path('asignaciones/actualizar/<uuid:id>/',actualizar_asignacion_view,name='actualizar_asignacion'),
-    path('asignaciones/eliminar/<uuid:id>/',eliminar_asignacion_view,name='eliminar_asignacion')
+    path('asignaciones/eliminar/<uuid:id>/',eliminar_asignacion_view,name='eliminar_asignacion'),
+    path('clientes/',listar_cliente_view,name='listar_clientes'),
 ]
