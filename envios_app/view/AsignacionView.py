@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from ..controllers.AsignacionController import AsignacionController
 
-# Listar todas las asignaciones
+
 @require_http_methods(["GET"])
 def listar_asignaciones(request):
     try:
@@ -12,7 +12,7 @@ def listar_asignaciones(request):
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
 
-# Obtener una asignación por su ID
+
 @require_http_methods(["GET"])
 def obtener_asignacion(request, id):
     asignacion = AsignacionController.obtener_asignacion_id(id)
@@ -20,7 +20,7 @@ def obtener_asignacion(request, id):
         return JsonResponse(asignacion.to_dict())
     return JsonResponse({'error': 'Asignación no encontrada'}, status=404)
 
-# Crear una nueva asignación
+
 @require_http_methods(["POST"])
 def crear_asignacion(request):
     transportista = request.POST.get('transportista')
@@ -38,10 +38,10 @@ def crear_asignacion(request):
     
     return JsonResponse({'error': 'Datos incompletos'}, status=400)
 
-# Actualizar una asignación existente
+
 @require_http_methods(["PUT"])
 def actualizar_asignacion(request, id):
-    datos = request.POST.dict()  # Convertir los datos enviados a un diccionario
+    datos = request.POST.dict()  
     try:
         asignacion_actualizada = AsignacionController.actualizar_asignacion(id, datos)
         if asignacion_actualizada:
@@ -50,7 +50,7 @@ def actualizar_asignacion(request, id):
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
 
-# Eliminar una asignación por su ID
+
 @require_http_methods(["DELETE"])
 def eliminar_asignacion(request, id):
     try:

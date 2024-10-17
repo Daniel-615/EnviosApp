@@ -1,20 +1,20 @@
 from django.http import JsonResponse
 from ..controllers.TransportistaController import TransportistaController
 
-# Listar transportistas
+
 def listar_transportistas(request):
     transportistas = TransportistaController.obtener_transportistas()
     data = list(transportistas.values())
     return JsonResponse(data, safe=False)
 
-# Obtener transportista por ID
+
 def obtener_transportista(request, id):
     transportista = TransportistaController.obtener_transportista_id(id)
     if transportista:
         return JsonResponse(transportista.to_dict())
     return JsonResponse({'error': 'Transportista no encontrado'}, status=404)
 
-# Crear un nuevo transportista
+
 def crear_transportista(request):
     if request.method == 'POST':
         nombre = request.POST.get('nombre')
@@ -27,7 +27,7 @@ def crear_transportista(request):
         return JsonResponse(transportista.to_dict(), status=201)
     return JsonResponse({'error': 'Método no permitido'}, status=405)
 
-# Actualizar un transportista existente
+
 def actualizar_transportista(request, id):
     if request.method == 'PUT':
         nombre = request.PUT.get('nombre')
@@ -42,7 +42,7 @@ def actualizar_transportista(request, id):
         return JsonResponse({'error': 'Transportista no encontrado'}, status=404)
     return JsonResponse({'error': 'Método no permitido'}, status=405)
 
-# Eliminar un transportista
+
 def eliminar_transportista(request, id):
     if request.method == 'DELETE':
         transportista_eliminado = TransportistaController.eliminar_transportista(id)

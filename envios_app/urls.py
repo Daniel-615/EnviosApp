@@ -11,6 +11,10 @@ from .views import (
     actualizar_asignacion_view,
     eliminar_asignacion_view,
     listar_cliente_view,
+    obtener_cliente_view,
+    crear_cliente_view,
+    actualizar_cliente_view,
+    eliminar_cliente_view,
 )
 urlpatterns = [
     path('vehiculos/', listar_vehiculo_view, name='listar_vehiculos'),
@@ -24,4 +28,8 @@ urlpatterns = [
     path('asignaciones/actualizar/<uuid:id>/',actualizar_asignacion_view,name='actualizar_asignacion'),
     path('asignaciones/eliminar/<uuid:id>/',eliminar_asignacion_view,name='eliminar_asignacion'),
     path('clientes/',listar_cliente_view,name='listar_clientes'),
+    path('clientes/<uuid:id>/',obtener_cliente_view,name='obtener_clientes'),
+    path('clientes/crear/',crear_cliente_view,name='crear_cliente'),
+    path('clientes/actualizar',actualizar_cliente_view,name='actualizar_cliente'),
+    path('clientes/eliminar',eliminar_cliente_view,name='eliminar_cliente')
 ]

@@ -1,20 +1,20 @@
 from django.http import JsonResponse
 from ..controllers.RastreoController import RastreoController
 
-# Listar rastreos
+
 def listar_rastreos(request):
     rastreos = RastreoController.obtener_rastreos()
     data = list(rastreos.values())
     return JsonResponse(data, safe=False)
 
-# Obtener rastreo por ID
+
 def obtener_rastreo(request, id):
     rastreo = RastreoController.obtener_rastreo_id(id)
     if rastreo:
         return JsonResponse(rastreo.to_dict())
     return JsonResponse({'error': 'Rastreo no encontrado'}, status=404)
 
-# Crear un nuevo rastreo
+
 def crear_rastreo(request):
     if request.method == 'POST':
         envio = request.POST.get('envio')
@@ -25,7 +25,7 @@ def crear_rastreo(request):
         return JsonResponse(rastreo.to_dict(), status=201)
     return JsonResponse({'error': 'Método no permitido'}, status=405)
 
-# Actualizar un rastreo existente
+
 def actualizar_rastreo(request, id):
     if request.method == 'PUT':
         envio = request.PUT.get('envio')
@@ -38,7 +38,7 @@ def actualizar_rastreo(request, id):
         return JsonResponse({'error': 'Rastreo no encontrado'}, status=404)
     return JsonResponse({'error': 'Método no permitido'}, status=405)
 
-# Eliminar un rastreo
+
 def eliminar_rastreo(request, id):
     if request.method == 'DELETE':
         rastreo_eliminado = RastreoController.eliminar_rastreo(id)

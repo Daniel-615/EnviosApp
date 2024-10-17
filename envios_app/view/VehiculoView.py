@@ -2,20 +2,20 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from ..controllers.VehiculoController import VehiculoController
 
-# Listar vehículos
+
 def listar_vehiculos(request):
     vehiculos = VehiculoController.obtener_vehiculos()
     data = list(vehiculos.values())
     return JsonResponse(data, safe=False)
 
-# Obtener vehículo por ID
+
 def obtener_vehiculo(request, id):
     vehiculo = VehiculoController.obtener_vehiculo_id(id)
     if vehiculo:
         return JsonResponse(vehiculo.to_dict())
     return JsonResponse({'error': 'Vehículo no encontrado'}, status=404)
 
-# Crear un nuevo vehículo
+
 @require_http_methods(["POST"])
 def crear_vehiculo(request):
     matricula = request.POST.get('matricula')
@@ -26,7 +26,6 @@ def crear_vehiculo(request):
         return JsonResponse(vehiculo.to_dict(), status=201)
     return JsonResponse({'error': 'Datos incompletos'}, status=400)
 
-# Actualizar un vehículo existente
 @require_http_methods(["PUT"])
 def actualizar_vehiculo(request, id):
     datos = request.POST.dict()  
@@ -38,7 +37,7 @@ def actualizar_vehiculo(request, id):
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
 
-# Eliminar un vehículo por ID
+
 @require_http_methods(["DELETE"])
 def eliminar_vehiculo(request, id):
     try:
