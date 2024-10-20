@@ -7,15 +7,17 @@ class UbicacionController:
 
     @staticmethod
     def obtener_ubicacion_id(id_ubicacion):
-        return Ubicacion.objects.get(id=id_ubicacion)
+        return Ubicacion.objects.get(id_ubicacion=id_ubicacion)
 
     @staticmethod
-    def crear_ubicacion(pais, departamento, municipio, direccion):
+    def crear_ubicacion(id_cliente,ciudad,calle,codigo_postal,coordenadas_geograficas,referencias):
         return Ubicacion.objects.create(
-            pais=pais,
-            departamento=departamento,
-            municipio=municipio,
-            direccion=direccion
+            id_cliente=id_cliente,
+            ciudad=ciudad,
+            calle=calle,
+            codigo_postal=codigo_postal,
+            coordenadas_geograficas=coordenadas_geograficas,
+            referencias=referencias
         )
 
     @staticmethod

@@ -7,7 +7,7 @@ class PaqueteController:
 
     @staticmethod 
     def obtener_paquete_id(id_paquete):
-        return Paquete.objects.get(id=id_paquete)
+        return Paquete.objects.get(id_paquete=id_paquete)
 
     @staticmethod
     def crear_paquete(id_envio, descripcion_paquete, peso, dimensiones, valor_declarado):

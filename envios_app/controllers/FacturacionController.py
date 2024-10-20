@@ -12,7 +12,7 @@ class FacturacionController:
     def obtener_facturacion_id(id_factura):
         """Obtiene una facturación por su ID."""
         try:
-            return Facturacion.objects.get(id=id_factura)
+            return Facturacion.objects.get(id_factura=id_factura)
         except ObjectDoesNotExist:
             return None
 

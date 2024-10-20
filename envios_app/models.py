@@ -83,10 +83,10 @@ class AsignacionVehiculoTransportista(models.Model):
     id_asignacion = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False
     )
-    transportista = models.ForeignKey(
+    id_transportista = models.ForeignKey(
         Transportista, on_delete=models.CASCADE, related_name='transportista'
     )
-    vehiculo = models.ForeignKey(
+    id_vehiculo = models.ForeignKey(
         Vehiculo, on_delete=models.CASCADE, related_name='vehiculo'
     )
     fecha_asignacion = models.DateTimeField(auto_now_add=True)
@@ -95,7 +95,7 @@ class AsignacionVehiculoTransportista(models.Model):
     )
 
     def __str__(self):
-        return f'{self.transportista} asignado a {self.vehiculo} desde {self.fecha_asignacion}'
+        return f'{self.id_transportista} asignado a {self.id_vehiculo} desde {self.fecha_asignacion}'
 
 
 class Ubicacion(models.Model):
@@ -120,7 +120,7 @@ class Ubicacion(models.Model):
     )
     referencias = models.TextField(
         blank=False, null=False
-    )  # opcional
+    )  
 
     def __str__(self):
         return f'{self.ciudad}, {self.calle}'

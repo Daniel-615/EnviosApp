@@ -1,4 +1,4 @@
-from ..models import FacturacionDetalle
+from ..models import Facturacion_detalle
 from django.core.exceptions import ObjectDoesNotExist
 
 class FacturacionDetalleController:
@@ -6,23 +6,22 @@ class FacturacionDetalleController:
     @staticmethod
     def obtener_facturacion_detalles():
         """Obtiene todos los detalles de facturación."""
-        return FacturacionDetalle.objects.all()
+        return Facturacion_detalle.objects.all()
 
     @staticmethod
     def obtener_facturacion_detalle_id(id_factura_detalle):
         """Obtiene un detalle de facturación por su ID."""
         try:
-            return FacturacionDetalle.objects.get(id=id_factura_detalle)
+            return Facturacion_detalle.objects.get(id_factura_detalle=id_factura_detalle)
         except ObjectDoesNotExist:
             return None
 
     @staticmethod
-    def crear_facturacion_detalle(id_factura, monto_total, fecha_facturacion, metodo_pago):
+    def crear_facturacion_detalle(id_factura, monto_total, metodo_pago):
         """Crea un nuevo detalle de facturación."""
-        return FacturacionDetalle.objects.create(
+        return Facturacion_detalle.objects.create(
             id_factura=id_factura,
             monto_total=monto_total,
-            fecha_facturacion=fecha_facturacion,
             metodo_pago=metodo_pago
         )
 

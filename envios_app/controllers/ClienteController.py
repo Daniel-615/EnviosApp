@@ -15,7 +15,7 @@ class ClienteController:
     def obtener_cliente_id(id_cliente):
         """Obtiene un cliente por su ID."""
         try:
-            return Cliente.objects.get(id=id_cliente)
+            return Cliente.objects.get(id_cliente=id_cliente)
         except ObjectDoesNotExist:
             return None
 

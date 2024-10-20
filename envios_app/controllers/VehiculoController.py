@@ -12,19 +12,17 @@ class VehiculoController:
     def obtener_vehiculo_id(id_vehiculo):
         """Obtiene un vehículo por su ID."""
         try:
-            return Vehiculo.objects.get(id=id_vehiculo)
+            return Vehiculo.objects.get(id_vehiculo=id_vehiculo)
         except ObjectDoesNotExist:
             return None
 
     @staticmethod
-    def crear_vehiculo(marca, modelo, placa, capacidad_carga, estado_vehiculo):
+    def crear_vehiculo(matricula_vehiculo,marca_vehiculo,modelo_vehiculo):
         """Crea un nuevo vehículo."""
         return Vehiculo.objects.create(
-            marca=marca,
-            modelo=modelo,
-            placa=placa,
-            capacidad_carga=capacidad_carga,
-            estado_vehiculo=estado_vehiculo
+            matricula_vehiculo=matricula_vehiculo,
+            marca_vehiculo=marca_vehiculo,
+            modelo_vehiculo=modelo_vehiculo
         )
 
     @staticmethod
