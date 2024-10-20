@@ -1,4 +1,4 @@
-from ..models import AsignacionVehiculoTransportista as Asignacion
+from ..models import AsignacionVehiculo as Asignacion
 from django.core.exceptions import ObjectDoesNotExist
 
 class AsignacionController:
@@ -12,16 +12,17 @@ class AsignacionController:
     def obtener_asignacion_id(id_asignacion):
         """Obtiene una asignación por su ID."""
         try:
-            return Asignacion.objects.get(id_asignacion=id_asignacion)
+            return Asignacion.objects.get(id_asignacion_vehiculo_transportista=id_asignacion)
         except ObjectDoesNotExist:
             return None
 
     @staticmethod
-    def crear_asignacion(transportista, vehiculo, fecha_fin=None):
+    def crear_asignacion(transportista, vehiculo, fecha_asignacion, fecha_fin=None):
         """Crea una nueva asignación de transportista a vehículo."""
         nueva_asignacion = Asignacion.objects.create(
-            transportista=transportista,
-            vehiculo=vehiculo,
+            id_transportista=transportista,
+            id_vehiculo=vehiculo,
+            fecha_asignacion=fecha_asignacion,
             fecha_fin_asignacion=fecha_fin
         )
         return nueva_asignacion

@@ -1,49 +1,49 @@
 from ..models import Vehiculo
+from django.core.exceptions import ObjectDoesNotExist
+
 class VehiculoController:
+
     @staticmethod
     def obtener_vehiculos():
-        """Obtiene todos los vehiculos"""
-        try:
-            return Vehiculo.objects.all()
-        except Exception as e:
-            print(f"Error: {e}")
+        """Obtiene todos los vehículos."""
+        return Vehiculo.objects.all()
+
     @staticmethod
-    def obtener_vehiculo_id(id):
-        """Obtiene un vehiculo por id"""
+    def obtener_vehiculo_id(id_vehiculo):
+        """Obtiene un vehículo por su ID."""
         try:
-            return Vehiculo.objects.get(id=id)
-        except Exception as e:
-            print(f"Error: {e}")
+            return Vehiculo.objects.get(id=id_vehiculo)
+        except ObjectDoesNotExist:
+            return None
+
     @staticmethod
-    def crear_vehiculo(matricula, marca, modelo):
-        """Crea un nuevo vehiculo"""
-        try:
-            return Vehiculo.objects.create(
-                matricula_vehiculo=matricula,
-                marca_vehiculo=marca,
-                modelo_vehiculo=modelo
-            )
-        except Exception as e:
-            print(f"Error: {e}")
+    def crear_vehiculo(marca, modelo, placa, capacidad_carga, estado_vehiculo):
+        """Crea un nuevo vehículo."""
+        return Vehiculo.objects.create(
+            marca=marca,
+            modelo=modelo,
+            placa=placa,
+            capacidad_carga=capacidad_carga,
+            estado_vehiculo=estado_vehiculo
+        )
+
     @staticmethod
-    def actualizar_vehiculo(id, datos):
-        """Actualiza su vehiculo por su ID."""
-        try:
-            vehiculo = VehiculoController.obtener_vehiculo_id(id)
+    def actualizar_vehiculo(id_vehiculo, datos):
+        """Actualiza los datos de un vehículo existente."""
+        vehiculo = VehiculoController.obtener_vehiculo_id(id_vehiculo)
+        if vehiculo:
             for key, value in datos.items():
-                setattr(vehiculo, key, value)
+                if hasattr(vehiculo, key):
+                    setattr(vehiculo, key, value)
             vehiculo.save()
             return vehiculo
-        except Exception as e:
-            print(f"Error: {e}")
+        return None
+
     @staticmethod
-    def eliminar_vehiculo(id):
-        """Elimina un vehiculo por su ID."""
-        try:
-            vehiculo = VehiculoController.obtener_vehiculo_id(id)
-            if vehiculo:
-                vehiculo.delete()
-                return True
-            return False
-        except Exception as e:
-            print(f"Error: {e}")
+    def eliminar_vehiculo(id_vehiculo):
+        """Elimina un vehículo por su ID."""
+        vehiculo = VehiculoController.obtener_vehiculo_id(id_vehiculo)
+        if vehiculo:
+            vehiculo.delete()
+            return True
+        return False

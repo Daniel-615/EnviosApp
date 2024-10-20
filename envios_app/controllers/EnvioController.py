@@ -17,12 +17,13 @@ class EnvioController:
             return None
 
     @staticmethod
-    def crear_envio(asignacion, ubicacion, estado='pendiente'):
+    def crear_envio(id_asignacion_transportista, id_ubicacion, fecha_creacion, estado_envio='pendiente'):
         """Crea un nuevo envío."""
         return Envio.objects.create(
-            id_asignacion=asignacion,
-            id_ubicacion=ubicacion,
-            estado_envio=estado
+            id_asignacion_transportista=id_asignacion_transportista,
+            id_ubicacion=id_ubicacion,
+            fecha_creacion=fecha_creacion,
+            estado_envio=estado_envio
         )
 
     @staticmethod

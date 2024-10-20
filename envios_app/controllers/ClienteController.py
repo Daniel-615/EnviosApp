@@ -20,14 +20,14 @@ class ClienteController:
             return None
 
     @staticmethod
-    def crear_cliente(nombre, apellido, correo, telefono):
+    def crear_cliente(remitente, telefono_remitente, destinatario, telefono_destinatario):
         """Crea un nuevo cliente."""
         try:
             nuevo_cliente = Cliente.objects.create(
-                nombre=nombre,
-                apellido=apellido,
-                correo=correo,
-                telefono=telefono
+                remitente=remitente,
+                telefono_remitente=telefono_remitente,
+                destinatario=destinatario,
+                telefono_destinatario=telefono_destinatario
             )
             return nuevo_cliente
         except Exception as e:
@@ -47,6 +47,7 @@ class ClienteController:
             return None
         except Exception as e:
             print(f"Error: {e}")
+
     @staticmethod
     def eliminar_cliente(id_cliente):
         """Elimina un cliente por su ID."""
