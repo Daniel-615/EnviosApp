@@ -40,18 +40,16 @@ class Transportista(models.Model):
     )
     dpi_transportista = models.CharField(
         max_length=15, blank=False, null=False,
-        validators=[MinLengthValidator(13), MaxLengthValidator(15), RegexValidator(regex=r'^\d+$', message="El DPI debe contener solo números")]
+
     )
     licencia_transportista = models.CharField(
         max_length=15, blank=False, null=False,
-        validators=[MinLengthValidator(8), MaxLengthValidator(15)]
     )
     correo_transportista = models.EmailField(
         max_length=100, blank=False, null=False
     )
     telefono_transportista = models.CharField(
         max_length=15, blank=False, null=False,
-        validators=[RegexValidator(regex=r'^\+?[1-9]\d{1,14}$', message="Número de teléfono inválido")]
     )
 
     class Meta:

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Transportistas</title>
+</head>
+<body>
+    <h1>Listado de Transportistas</h1>
+
+    <a href="{% url 'crear_transportista' %}">Crear Nuevo Transportista</a>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>DPI</th>
+                <th>Licencia</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transportista in transportistas %}
+            <tr>
+                <td>{{ transportista.nombre }}</td>
+                <td>{{ transportista.apellido }}</td>
+                <td>{{ transportista.dpi }}</td>
+                <td>{{ transportista.licencia }}</td>
+                <td>{{ transportista.correo }}</td>
+                <td>{{ transportista.telefono }}</td>
+                <td>
+                    <a href="{% url 'actualizar_transportista' transportista.id_transportista %}">Editar</a> |
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7">No hay transportistas registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'home' %}">Volver al inicio</a>
+</body>
+</html>

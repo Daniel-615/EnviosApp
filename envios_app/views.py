@@ -1,5 +1,11 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from .models import Cliente,Vehiculo,Facturacion,FacturacionDetalle,Rastreo,Ubicacion,Transportista,Envio,Paquete,AsignacionVehiculoTransportista as Asignacion 
+from django.contrib import messages
+
+
+def home(request):
+    return render(request, 'home.html')  
+
 def listar_vehiculos(request):
     vehiculos = Vehiculo.objects.all()  
     return render(request, 'asignacion/listar_vehiculos.html', {'vehiculos': vehiculos})
@@ -77,3 +83,55 @@ def actualizar_asignacion(request,id):
         
         asignacion.save()
         return redirect('listar_asignaciones')
+def listar_transportistas(request):
+    tranportistas=Transportista.objects.all()
+    return render(request,'transportista/listar_transportistas.html',{'transportistas':tranportistas})
+def crear_transportista(request):
+    if request.method=='GET':
+        return render(request,'transportista/create_transportista.html')
+    if request.method=='POST':
+        try:
+            nombre_transportista=request.POST.get('nombre')
+            apellido_transportista=request.POST.get('apellido')
+            dpi_transportista=request.POST.get('dpi')
+            licencia_transportista=request.POST.get('licencia')
+            correo_transportista=request.POST.get('correo')
+            telefono_transportista=request.POST.get('telefono')
+
+            nuevo_transportista=Transportista(
+                nombre_transportista=nombre_transportista,
+                apellido_transportista=apellido_transportista,
+                dpi_transportista=dpi_transportista,
+                licencia_transportista=licencia_transportista,
+                correo_transportista=correo_transportista,
+                telefono_transportista=telefono_transportista
+            )
+
+            nuevo_transportista.save()
+            messages.success(request, "El transportista ha sido creado exitosamente.")
+            return redirect('listar_transportistas')
+        except Exception as e:
+            messages.error(request, f"Error al crear el transportista: {e}")
+            return render(request, 'transportista/create_transportista.html')
+
+def actualizar_transportista(request,id):
+    transportista=get_object_or_404(Transportista,id)
+    if request.method=='GET':
+        return render('transportista/update_transportista.html')
+    if request.method=='POST':
+        nombre_transportista=request.POST.get('nombre')
+        apellido_transportista=request.POST.get('apellido')
+        dpi_transportista=request.POST.get('dpi')
+        licencia_transportista=request.POST.get('licencia')
+        correo_transportista=request.POST.get('correo')
+        telefono_transportista=request.POST.get('telefono')
+
+        transportista.nombre_transportista=nombre_transportista
+        transportista.apellido_transportista=apellido_transportista
+        transportista.dpi_transportista=dpi_transportista
+        transportista.licencia_transportista=licencia_transportista
+        transportista.correo_transportista=correo_transportista
+        transportista.telefono_transportista=telefono_transportista
+
+        transportista.save()
+        return redirect('listar_transportistas')
