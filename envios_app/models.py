@@ -225,7 +225,7 @@ class Facturacion(models.Model):
         return f'Factura {self.id_factura}'
 
 
-class Facturacion_detalle(models.Model):
+class FacturacionDetalle(models.Model):
     id_factura_detalle = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False
     )
