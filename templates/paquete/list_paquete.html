@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Paquetes</title>
+</head>
+<body>
+    <h1>Listado de Paquetes</h1>
+
+    <a href="{% url 'create_paquete' %}">Crear Nuevo Paquete</a>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID Paquete</th>
+                <th>ID Envío</th>
+                <th>Descripción</th>
+                <th>Peso</th>
+                <th>Dimensiones</th>
+                <th>Valor Declarado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for paquete in paquetes %}
+            <tr>
+                <td>{{ paquete.id_paquete }}</td>
+                <td>{{ paquete.id_envio.codigo_rastreo }}</td>
+                <td>{{ paquete.descripcion_paquete }}</td>
+                <td>{{ paquete.peso }} kg</td>
+                <td>{{ paquete.dimensiones }}</td>
+                <td>{{ paquete.valor_declarado }} USD</td>
+                <td>
+                    <a href="{% url 'update_paquete' paquete.id_paquete %}">Editar</a> |
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7">No hay paquetes registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'home' %}">Volver al inicio</a>
+</body>
+</html>

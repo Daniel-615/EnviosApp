@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar Asignación</title>
+</head>
+<body>
+    <h1>Actualizar Asignación</h1>
+    
+    <form method="POST">
+        {% csrf_token %}
+        <label for="transportista">Transportista:</label>
+        <select name="transportista" id="transportista" required>
+            {% for transportista in transportistas %}
+                <option value="{{ transportista.id }}" {% if asignacion.id_transportista == transportista.id %}selected{% endif %}>{{ transportista.nombre }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label for="vehiculo">Vehículo:</label>
+        <select name="vehiculo" id="vehiculo" required>
+            {% for vehiculo in vehiculos %}
+                <option value="{{ vehiculo.id }}" {% if asignacion.id_vehiculo == vehiculo.id %}selected{% endif %}>{{ vehiculo.matricula }} - {{ vehiculo.marca }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label for="fecha_fin">Fecha Fin de Asignación:</label>
+        <input type="date" name="fecha_fin" id="fecha_fin" value="{{ asignacion.fecha_fin_asignacion }}" required><br><br>
+
+        <button type="submit">Actualizar Asignación</button>
+    </form>
+
+    <a href="{% url 'listar_asignaciones' %}">Volver al listado</a>
+</body>
+</html>

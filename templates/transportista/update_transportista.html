@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar Transportista</title>
+</head>
+<body>
+    <h1>Actualizar Transportista</h1>
+    
+    <form method="POST">
+        {% csrf_token %}
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" id="nombre" value="{{ transportista.nombre }}" required><br><br>
+
+        <label for="apellido">Apellido:</label>
+        <input type="text" name="apellido" id="apellido" value="{{ transportista.apellido }}" required><br><br>
+
+        <label for="dpi">DPI:</label>
+        <input type="text" name="dpi" id="dpi" value="{{ transportista.dpi }}" required><br><br>
+
+        <label for="licencia">Licencia:</label>
+        <input type="text" name="licencia" id="licencia" value="{{ transportista.licencia }}" required><br><br>
+
+        <label for="correo">Correo Electrónico:</label>
+        <input type="email" name="correo" id="correo" value="{{ transportista.correo }}" required><br><br>
+
+        <label for="telefono">Teléfono:</label>
+        <input type="text" name="telefono" id="telefono" value="{{ transportista.telefono }}" required><br><br>
+
+        <button type="submit">Actualizar Transportista</button>
+    </form>
+
+    <a href="{% url 'listar_transportistas' %}">Volver al listado</a>
+</body>
+</html>

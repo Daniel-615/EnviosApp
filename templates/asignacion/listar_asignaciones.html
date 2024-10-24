@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Asignaciones</title>
+</head>
+<body>
+    <h1>Listado de Asignaciones</h1>
+
+    <a href="{% url 'crear_asignacion' %}">Crear Asignación</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Transportista</th>
+                <th>Vehículo</th>
+                <th>Fecha de Fin</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for asignacion in asignaciones %}
+            <tr>
+                <td>{{ asignacion.transportista.nombre }}</td>
+                <td>{{ asignacion.vehiculo.matricula }} - {{ asignacion.vehiculo.marca }}</td>
+                <td>{{ asignacion.fecha_fin_asignacion }}</td>
+                <td>
+                    <a href="{% url 'actualizar_asignacion' asignacion.id %}">Editar</a> |
+                    <a href="{% url 'eliminar_asignacion' asignacion.id %}">Eliminar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No hay asignaciones disponibles.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'home' %}">Volver al inicio</a>
+</body>
+</html>
