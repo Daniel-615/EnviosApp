@@ -1,5 +1,4 @@
 from django.db import models
-from django.core.validators import RegexValidator, MinLengthValidator, MaxLengthValidator
 import uuid
 
 class Cliente(models.Model):
@@ -214,7 +213,6 @@ class Facturacion(models.Model):
     id_cliente = models.ForeignKey(
         Cliente, on_delete=models.CASCADE
     )
-
     def __str__(self):
         return f'Factura {self.id_factura}'
 
