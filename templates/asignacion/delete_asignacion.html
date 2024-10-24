@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Asignación</title>
+</head>
+<body>
+    <h1>Eliminar Asignación</h1>
+
+    <p>¿Estás seguro que deseas eliminar esta asignación para el transportista <strong>{{ asignacion.transportista }}</strong> y el vehículo <strong>{{ asignacion.vehiculo }}</strong>?</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Confirmar Eliminación</button>
+        <a href="{% url 'listar_asignaciones' %}">Cancelar</a>
+    </form>
+
+    <a href="{% url 'listar_asignaciones' %}">Volver al listado de asignaciones</a>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Detalles de Facturación</title>
+</head>
+<body>
+    <h1>Detalles de Facturación</h1>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID Factura</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Total</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for detalle in detalles %}
+            <tr>
+                <td>{{ detalle.factura_id }}</td>
+                <td>{{ detalle.producto }}</td>
+                <td>{{ detalle.cantidad }}</td>
+                <td>{{ detalle.precio_unitario }}</td>
+                <td>{{ detalle.total }}</td>
+                <td>
+                    <a href="{% url 'update_facturacion_detalle' detalle.id %}">Editar</a> |
+                    <a href="{% url 'delete_facturacion_detalle' detalle.id %}">Eliminar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No hay detalles de facturación disponibles.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'create_facturacion_detalle' %}">Crear Detalle de Facturación</a>
+</body>
+</html>

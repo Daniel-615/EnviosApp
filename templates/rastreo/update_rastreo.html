@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar Rastreo</title>
+</head>
+<body>
+    <h1>Actualizar Rastreo</h1>
+    
+    <form method="POST">
+        {% csrf_token %}
+        
+        <label for="envio">Envío:</label>
+        <select name="envio" id="envio" required>
+            {% for envio in envios %}
+                <option value="{{ envio.id }}" {% if rastreo.envio_id == envio.id %}selected{% endif %}>Envío #{{ envio.id }} - Cliente: {{ envio.cliente.nombre }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label for="estado">Estado:</label>
+        <input type="text" name="estado" id="estado" value="{{ rastreo.estado }}" required><br><br>
+
+        <label for="ubicacion">Ubicación:</label>
+        <input type="text" name="ubicacion" id="ubicacion" value="{{ rastreo.ubicacion }}" required><br><br>
+
+        <label for="fecha_actualizacion">Fecha de Actualización:</label>
+        <input type="datetime-local" name="fecha_actualizacion" id="fecha_actualizacion" value="{{ rastreo.fecha_actualizacion|date:'Y-m-d\TH:i' }}" required><br><br>
+
+        <button type="submit">Actualizar Rastreo</button>
+    </form>
+
+    <a href="{% url 'listar_rastreo' %}">Volver al listado</a>
+</body>
+</html>

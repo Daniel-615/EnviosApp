@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Envío</title>
+</head>
+<body>
+    <h1>Eliminar Envío</h1>
+
+    <p>¿Estás seguro que deseas eliminar el envío con el código <strong>{{ envio.codigo }}</strong>?</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Confirmar Eliminación</button>
+        <a href="{% url 'listar_envio' %}">Cancelar</a>
+    </form>
+
+    <a href="{% url 'listar_envio' %}">Volver al listado de envíos</a>
+</body>
+</html>

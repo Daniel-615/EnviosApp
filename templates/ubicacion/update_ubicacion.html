@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar Ubicación</title>
+</head>
+<body>
+    <h1>Actualizar Ubicación</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        <p><strong>ID Ubicación:</strong> {{ ubicacion.id }}</p>
+
+        <label for="direccion">Dirección:</label>
+        <input type="text" name="direccion" id="direccion" value="{{ ubicacion.direccion }}" required><br><br>
+
+        <label for="ciudad">Ciudad:</label>
+        <input type="text" name="ciudad" id="ciudad" value="{{ ubicacion.ciudad }}" required><br><br>
+
+        <label for="pais">País:</label>
+        <input type="text" name="pais" id="pais" value="{{ ubicacion.pais }}" required><br><br>
+
+        <button type="submit">Actualizar Ubicación</button>
+    </form>
+
+    <a href="{% url 'list_ubicacion' %}">Volver al listado</a>
+</body>
+</html>
