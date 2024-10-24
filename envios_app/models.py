@@ -11,14 +11,12 @@ class Cliente(models.Model):
     )
     telefono_remitente = models.CharField(
         max_length=20, blank=False, null=False,
-        validators=[RegexValidator(regex=r'^\+?[1-9]\d{1,14}$', message="Número de teléfono inválido")]
     )
     destinatario = models.CharField(
         max_length=30, blank=False, null=False
     )
     telefono_destinatario = models.CharField(
         max_length=20, blank=False, null=False,
-        validators=[RegexValidator(regex=r'^\+?[1-9]\d{1,14}$', message="Número de teléfono inválido")]
     )
     
     class Meta:
@@ -40,7 +38,6 @@ class Transportista(models.Model):
     )
     dpi_transportista = models.CharField(
         max_length=15, blank=False, null=False,
-
     )
     licencia_transportista = models.CharField(
         max_length=15, blank=False, null=False,
@@ -111,7 +108,6 @@ class Ubicacion(models.Model):
     )
     codigo_postal = models.CharField(
         max_length=10, blank=False, null=False,
-        validators=[RegexValidator(regex=r'^\d+$', message="El código postal debe contener solo números")]
     )
     coordenadas_geograficas = models.CharField(
         max_length=255,blank=False,null=False
