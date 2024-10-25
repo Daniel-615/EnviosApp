@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Ubicación</title>
+</head>
+<body>
+    <h1>Eliminar Ubicación</h1>
+    
+    <p>¿Estás seguro que deseas eliminar la ubicación <strong>{{ ubicacion.direccion }}</strong> ubicada en <strong>{{ ubicacion.ciudad }}</strong>, <strong>{{ ubicacion.pais }}</strong>?</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Confirmar Eliminación</button>
+        <a href="{% url 'list_ubicacion' %}">Cancelar</a>
+    </form>
+
+    <a href="{% url 'list_ubicacion' %}">Volver al listado de ubicaciones</a>
+</body>
+</html>

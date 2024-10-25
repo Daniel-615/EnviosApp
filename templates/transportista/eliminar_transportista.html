@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Transportista</title>
+</head>
+<body>
+    <h1>Eliminar Transportista</h1>
+
+    <p>¿Estás seguro que deseas eliminar al transportista <strong>{{ transportista.nombre }}</strong>?</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Confirmar Eliminación</button>
+        <a href="{% url 'listar_transportistas' %}">Cancelar</a>
+    </form>
+
+    <a href="{% url 'listar_transportistas' %}">Volver al listado de transportistas</a>
+</body>
+</html>

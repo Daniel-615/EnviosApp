@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Facturación</title>
+</head>
+<body>
+    <h1>Listado de Facturación</h1>
+    <a href="{% url 'create_facturacion' %}">Nueva Facturación</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID Factura</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Total</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for factura in facturas %}
+            <tr>
+                <td>{{ factura.id }}</td>
+                <td>{{ factura.cliente.nombre }}</td>
+                <td>{{ factura.fecha }}</td>
+                <td>{{ factura.total }}</td>
+                <td>
+                    <a href="{% url 'update_facturacion' factura.id %}">Editar</a> |
+                    <a href="{% url 'delete_facturacion' factura.id %}">Eliminar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No hay facturas registradas.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'home' %}">Volver al inicio</a>
+</body>
+</html>
