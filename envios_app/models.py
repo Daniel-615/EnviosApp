@@ -47,7 +47,9 @@ class Transportista(models.Model):
     telefono_transportista = models.CharField(
         max_length=15, blank=False, null=False,
     )
-
+    activo=models.BooleanField(
+        default=True
+    )
     class Meta:
         indexes = [models.Index(fields=['telefono_transportista']), models.Index(fields=['dpi_transportista'])]
 
@@ -68,7 +70,9 @@ class Vehiculo(models.Model):
     modelo_vehiculo = models.CharField(
         max_length=40, blank=False, null=False
     )
-
+    activo=models.BooleanField(
+        default=True
+    )
     def __str__(self):
         return f'vehículo: {self.modelo_vehiculo}'
 
@@ -87,7 +91,9 @@ class AsignacionVehiculoTransportista(models.Model):
     fecha_fin_asignacion = models.DateTimeField(
         null=True, blank=True
     )
-
+    activo=models.BooleanField(
+        default=True
+    )
     def __str__(self):
         return f'{self.id_transportista} asignado a {self.id_vehiculo} desde {self.fecha_asignacion}'
 
@@ -173,7 +179,9 @@ class Paquete(models.Model):
     valor_declarado = models.DecimalField(
         max_digits=12, decimal_places=2
     )
-
+    asignado=models.BooleanField(
+        default=False
+    )
     def __str__(self):
         return f"Paquete {self.id_paquete} - {self.descripcion_paquete}"
 

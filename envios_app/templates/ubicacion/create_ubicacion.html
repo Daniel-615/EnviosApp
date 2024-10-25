@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Ubicación</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ubicacion/ubicacion_create.css' %}">
+</head>
+<body>
+    <h1>Crear Nueva Ubicación</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        <label for="calle">Calle:</label>
+        <input type="text" id="calle" name="calle" required>
+
+        <label for="ciudad">Ciudad:</label>
+        <input type="text" id="ciudad" name="ciudad" required>
+
+        <label for="postal">Código Postal:</label>
+        <input type="text" id="postal" name="postal" required>
+
+        <label for="cliente">Cliente:</label>
+        <select id="cliente" name="cliente" required>
+            <option value="" disabled selected>Selecciona un cliente</option>
+            {% for cliente in clientes %}
+                <option value="{{ cliente.id_cliente }}">{{ cliente.nombre }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="referencias">Referencias:</label>
+        <input type="text" id="referencias" name="referencias">
+
+        <label for="coordenadas">Coordenadas Geográficas:</label>
+        <input type="text" id="coordenadas" name="coordenadas">
+
+        <button type="submit">Crear Ubicación</button>
+    </form>
+
+    <a href="{% url 'listar_ubicaciones' %}" class="button">Volver a la Lista</a>
+</body>
+</html>

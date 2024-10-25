@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listado de Vehículos</title>
+    <title>Lista de Rastreos</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -18,36 +18,26 @@
         }
 
         .container {
-            background-color: #fff;
+            background-color: #ffffff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 90%;
-            max-width: 800px;
+            max-width: 1200px;
         }
 
         h1 {
             text-align: center;
             color: #333;
-        }
-
-        .actions {
-            display: flex;
-            justify-content: flex-end;
             margin-bottom: 20px;
         }
 
-        .actions a {
-            padding: 10px 15px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
+        .messages {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            margin-bottom: 20px;
             border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        .actions a:hover {
-            background-color: #0056b3;
         }
 
         table {
@@ -78,6 +68,7 @@
         .table-actions a {
             color: #007bff;
             text-decoration: none;
+            margin-right: 10px;
         }
 
         .table-actions a:hover {
@@ -88,6 +79,24 @@
             text-align: center;
             color: #666;
             padding: 20px;
+        }
+
+        .actions {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .actions a {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .actions a:hover {
+            background-color: #218838;
         }
 
         .back-link {
@@ -101,68 +110,53 @@
         .back-link:hover {
             text-decoration: underline;
         }
-
-        @media (max-width: 768px) {
-            table, thead, tbody, th, td, tr {
-                display: block;
-            }
-
-            th, td {
-                padding: 10px;
-                text-align: right;
-            }
-
-            th {
-                background-color: transparent;
-                color: #333;
-                font-weight: bold;
-            }
-
-            td:before {
-                content: attr(data-label);
-                float: left;
-                font-weight: bold;
-                color: #555;
-            }
-
-            tbody tr {
-                border-bottom: 1px solid #ddd;
-                margin-bottom: 10px;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Listado de Vehículos</h1>
+        <h1>Lista de Rastreos</h1>
+
+        {% if messages %}
+        <div class="messages">
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
 
         <div class="actions">
-            <a href="{% url 'crear_vehiculo' %}">Crear Vehículo</a>
+            <a href="{% url 'crear_rastreo' %}">Crear nuevo rastreo</a>
         </div>
 
         <table>
             <thead>
                 <tr>
-                    <th>Matrícula</th>
-                    <th>Marca</th>
-                    <th>Modelo</th>
+                    <th>ID Rastreo</th>
+                    <th>ID Envío</th>
+                    <th>Ubicación Actual</th>
+                    <th>Estado del Paquete</th>
+                    <th>Observaciones</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                {% for vehiculo in vehiculos %}
+                {% for rastreo in rastreos %}
                 <tr>
-                    <td data-label="Matrícula">{{ vehiculo.matricula_vehiculo }}</td>
-                    <td data-label="Marca">{{ vehiculo.marca_vehiculo }}</td>
-                    <td data-label="Modelo">{{ vehiculo.modelo_vehiculo }}</td>
-                    <td data-label="Acciones" class="table-actions">
-                        <a href="{% url 'actualizar_vehiculo' vehiculo.id_vehiculo %}">Editar</a> |
-                        <a href="{% url 'eliminar_vehiculo' vehiculo.id_vehiculo %}">Eliminar</a> 
+                    <td>{{ rastreo.id_rastreo }}</td>
+                    <td>{{ rastreo.id_envio }}</td>
+                    <td>{{ rastreo.ubicacion_actual }}</td>
+                    <td>{{ rastreo.estado_paquete }}</td>
+                    <td>{{ rastreo.observaciones }}</td>
+                    <td class="table-actions">
+                        <a href="{% url 'actualizar_rastreo' rastreo.id_rastreo %}">Actualizar</a>
+                        <a href="{% url 'eliminar_rastreo' rastreo.id_rastreo %}" onclick="return confirm('¿Estás seguro de que deseas eliminar este rastreo?');">Eliminar</a>
                     </td>
                 </tr>
                 {% empty %}
                 <tr>
-                    <td colspan="4" class="no-data">No hay vehículos disponibles.</td>
+                    <td colspan="6" class="no-data">No hay rastreos disponibles.</td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar Paquete</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'paquete/paquete_update.css' %}">
+</head>
+<body>
+    <h1>Actualizar Paquete</h1>
+    
+    <form method="POST">
+        {% csrf_token %}
+        
+        <label for="descripcion_paquete">Descripción del Paquete:</label>
+        <input type="text" id="descripcion_paquete" name="descripcion_paquete" value="{{ paquete.descripcion_paquete }}" required>
+        
+        <label for="peso">Peso:</label>
+        <input type="number" id="peso" name="peso" value="{{ paquete.peso }}" step="0.01" required>
+        
+        <label for="dimensiones">Dimensiones:</label>
+        <input type="text" id="dimensiones" name="dimensiones" value="{{ paquete.dimensiones }}" required>
+        
+        <label for="valor_declarado">Valor Declarado:</label>
+        <input type="number" id="valor_declarado" name="valor_declarado" value="{{ paquete.valor_declarado }}" step="0.01" required>
+        
+        <button type="submit" class="button">Actualizar Paquete</button>
+    </form>
+    
+    <a href="{% url 'listar_paquetes' %}" class="button">Volver a la Lista</a>
+</body>
+</html>

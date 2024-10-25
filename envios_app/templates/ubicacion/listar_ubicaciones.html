@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Ubicaciones</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ubicacion/ubicacion_listar.css' %}">
+</head>
+<body>
+    <h1>Lista de Ubicaciones</h1>
+    
+    <a href="{% url 'crear_ubicacion' %}" class="button">Crear Nueva Ubicación</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Calle</th>
+                <th>Ciudad</th>
+                <th>Código Postal</th>
+                <th>Cliente</th>
+                <th>Coordenadas</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ubicacion in ubicaciones %}
+                <tr>
+                    <td>{{ ubicacion.calle }}</td>
+                    <td>{{ ubicacion.ciudad }}</td>
+                    <td>{{ ubicacion.codigo_postal }}</td>
+                    <td>{{ ubicacion.id_cliente.nombre }}</td>
+                    <td>{{ ubicacion.coordenadas_geograficas }}</td>
+                    <td>
+                        <a href="{% url 'actualizar_ubicacion' ubicacion.id_ubicacion %}">Editar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'home' %}" class="button">Volver a Inicio</a>
+</body>
+</html>

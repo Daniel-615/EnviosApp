@@ -4,39 +4,171 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de Asignaciones</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 1000px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .actions a {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .actions a:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .table-actions a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .table-actions a:hover {
+            text-decoration: underline;
+        }
+
+        .no-data {
+            text-align: center;
+            color: #666;
+            padding: 20px;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            th, td {
+                padding: 10px;
+                text-align: right;
+            }
+
+            th {
+                background-color: transparent;
+                color: #333;
+                font-weight: bold;
+            }
+
+            td:before {
+                content: attr(data-label);
+                float: left;
+                font-weight: bold;
+                color: #555;
+            }
+
+            tbody tr {
+                border-bottom: 1px solid #ddd;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Listado de Asignaciones</h1>
+    <div class="container">
+        <h1>Listado de Asignaciones</h1>
 
-    <a href="{% url 'crear_asignacion' %}">Crear Asignación</a>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Transportista</th>
-                <th>Vehículo</th>
-                <th>Fecha de Fin</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for asignacion in asignaciones %}
-            <tr>
-                <td>{{ asignacion.transportista.nombre }}</td>
-                <td>{{ asignacion.vehiculo.matricula }} - {{ asignacion.vehiculo.marca }}</td>
-                <td>{{ asignacion.fecha_fin_asignacion }}</td>
-                <td>
-                    <a href="{% url 'actualizar_asignacion' asignacion.id %}">Editar</a> |
-                    <a href="{% url 'eliminar_asignacion' asignacion.id %}">Eliminar</a>
-                </td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="4">No hay asignaciones disponibles.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+        <div class="actions">
+            <a href="{% url 'crear_asignacion' %}">Crear Asignación</a>
+        </div>
 
-    <a href="{% url 'home' %}">Volver al inicio</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Transportista</th>
+                    <th>Vehículo</th>
+                    <th>Fecha de Fin</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for asignacion in asignaciones %}
+                <tr>
+                    <td data-label="Transportista">{{ asignacion.id_transportista.nombre_transportista }}</td>
+                    <td data-label="Vehículo">{{ asignacion.id_vehiculo.matricula_vehiculo }} - {{ asignacion.id_vehiculo.marca_vehiculo }}</td>
+                    <td data-label="Fecha de Fin">{{ asignacion.fecha_fin_asignacion }}</td>
+                    <td data-label="Acciones" class="table-actions">
+                        <a href="{% url 'actualizar_asignacion' asignacion.id_asignacion %}">Editar</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="no-data">No hay asignaciones disponibles.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a class="back-link" href="{% url 'home' %}">Volver al inicio</a>
+    </div>
 </body>
 </html>

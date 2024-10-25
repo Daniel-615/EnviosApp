@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar Envío</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'envio/envio_update.css' %}">
+</head>
+<body>
+    <h1>Actualizar Envío</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        <label for="estado">Estado del Envío:</label>
+        <input type="text" id="estado" name="estado" value="{{ envio.estado_envio }}" required>
+
+        <button type="submit">Actualizar Envío</button>
+    </form>
+
+    <a href="{% url 'listar_envios' %}">Volver a la Lista</a>
+</body>
+</html>

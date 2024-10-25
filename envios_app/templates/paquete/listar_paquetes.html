@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Paquetes</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'paquete/paquete_listar.css' %}">
+</head>
+<body>
+    <h1>Lista de Paquetes</h1>
+    
+    <a href="{% url 'crear_paquete' %}" class="button">Crear Nuevo Paquete</a>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID Paquete</th>
+                <th>ID Envío</th>
+                <th>Descripción</th>
+                <th>Peso</th>
+                <th>Dimensiones</th>
+                <th>Valor Declarado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for paquete in paquetes %}
+            <tr>
+                <td>{{ paquete.id }}</td>
+                <td>{{ paquete.id_envio }}</td>
+                <td>{{ paquete.descripcion_paquete }}</td>
+                <td>{{ paquete.peso }}</td>
+                <td>{{ paquete.dimensiones }}</td>
+                <td>{{ paquete.valor_declarado }}</td>
+                <td>
+                    <a href="{% url 'actualizar_paquete' paquete.id %}" class="button">Editar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7">No hay paquetes disponibles.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

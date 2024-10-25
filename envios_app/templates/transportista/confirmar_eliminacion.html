@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmar Eliminación</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .actions {
+            margin-top: 20px;
+        }
+
+        .actions form {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        button, a {
+            padding: 10px 15px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        button {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        a {
+            background-color: #007bff;
+            color: white;
+        }
+
+        button:hover, a:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Confirmar Eliminación</h1>
+        <p>¿Estás seguro que deseas marcar como inactivo al transportista <strong>{{ transportista.nombre_transportista }}</strong>?</p>
+        
+        <div class="actions">
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit">Confirmar</button>
+            </form>
+            <a href="{% url 'listar_transportistas' %}">Cancelar</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Rastreo</title>
+    <title>Actualizar Rastreo</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -47,7 +47,7 @@
             color: #333;
         }
 
-        input[type="text"], textarea, select {
+        input[type="text"], textarea {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
@@ -57,14 +57,9 @@
             font-size: 1rem;
         }
 
-        select {
-            height: auto;
-            background-color: #f9f9f9;
-        }
-
         button {
             padding: 12px 20px;
-            background-color: #28a745;
+            background-color: #007bff;
             color: white;
             border: none;
             border-radius: 5px;
@@ -74,7 +69,7 @@
         }
 
         button:hover {
-            background-color: #218838;
+            background-color: #0056b3;
         }
 
         .back-link {
@@ -96,7 +91,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Crear Nuevo Rastreo</h1>
+        <h1>Actualizar Rastreo</h1>
         
         {% if messages %}
         <div class="messages">
@@ -110,35 +105,26 @@
 
         <form method="POST">
             {% csrf_token %}
-            
-            <div class="form-group">
-                <label for="envio">ID Envíos:</label>
-                <select id="envio" name="envio" required>
-                    {% for envio in envios %}
-                        <option value="{{ envio.id_envio }}">{{ envio.id_envio }} - {{ envio.nombre_envio }}</option>
-                    {% endfor %}
-                </select>
-            </div>
 
             <div class="form-group">
                 <label for="ubicacion">Ubicación Actual:</label>
-                <input type="text" id="ubicacion" name="ubicacion" required>
+                <input type="text" id="ubicacion" name="ubicacion" value="{{ rastreo.ubicacion_actual }}" required>
             </div>
 
             <div class="form-group">
                 <label for="estado">Estado del Paquete:</label>
-                <input type="text" id="estado" name="estado" required>
+                <input type="text" id="estado" name="estado" value="{{ rastreo.estado_paquete }}" required>
             </div>
 
             <div class="form-group">
                 <label for="observaciones">Observaciones:</label>
-                <textarea id="observaciones" name="observaciones"></textarea>
+                <textarea id="observaciones" name="observaciones">{{ rastreo.observaciones }}</textarea>
             </div>
 
-            <button type="submit">Crear Rastreo</button>
+            <button type="submit">Actualizar Rastreo</button>
         </form>
         
-        <a class="back-link" href="{% url 'listar_rastreos' %}">Volver a la lista de rastreos</a>
+        <a class="back-link" href="{% url 'listar_rastreo' %}">Volver a la lista de rastreos</a>
     </div>
 </body>
 </html>

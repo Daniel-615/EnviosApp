@@ -4,32 +4,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actualizar Asignación</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        select, input[type="date"], button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h1>Actualizar Asignación</h1>
-    
-    <form method="POST">
-        {% csrf_token %}
-        <label for="transportista">Transportista:</label>
-        <select name="transportista" id="transportista" required>
-            {% for transportista in transportistas %}
-                <option value="{{ transportista.id }}" {% if asignacion.id_transportista == transportista.id %}selected{% endif %}>{{ transportista.nombre }}</option>
-            {% endfor %}
-        </select><br><br>
+    <div class="container">
+        <h1>Actualizar Asignación</h1>
+        
+        <form method="POST">
+            {% csrf_token %}
+            <label for="transportista">Transportista:</label>
+            <select name="transportista" id="transportista" required>
+                {% for transportista in transportistas %}
+                    <option value="{{ transportista.id_transportista }}" {% if asignacion.id_transportista == transportista.id %}selected{% endif %}>
+                        {{ transportista.nombre_transportista }}
+                    </option>
+                {% endfor %}
+            </select>
 
-        <label for="vehiculo">Vehículo:</label>
-        <select name="vehiculo" id="vehiculo" required>
-            {% for vehiculo in vehiculos %}
-                <option value="{{ vehiculo.id }}" {% if asignacion.id_vehiculo == vehiculo.id %}selected{% endif %}>{{ vehiculo.matricula }} - {{ vehiculo.marca }}</option>
-            {% endfor %}
-        </select><br><br>
+            <label for="vehiculo">Vehículo:</label>
+            <select name="vehiculo" id="vehiculo" required>
+                {% for vehiculo in vehiculos %}
+                    <option value="{{ vehiculo.id_vehiculo }}" {% if asignacion.id_vehiculo == vehiculo.id %}selected{% endif %}>
+                        {{ vehiculo.matricula_vehiculo }} - {{ vehiculo.marca_vehiculo }}
+                    </option>
+                {% endfor %}
+            </select>
 
-        <label for="fecha_fin">Fecha Fin de Asignación:</label>
-        <input type="date" name="fecha_fin" id="fecha_fin" value="{{ asignacion.fecha_fin_asignacion }}" required><br><br>
+            <label for="fecha_fin">Fecha Fin de Asignación:</label>
+            <input type="date" name="fecha_fin" id="fecha_fin" value="{{ asignacion.fecha_fin_asignacion }}" required>
 
-        <button type="submit">Actualizar Asignación</button>
-    </form>
+            <button type="submit">Actualizar Asignación</button>
+        </form>
 
-    <a href="{% url 'listar_asignaciones' %}">Volver al listado</a>
+        <a class="back-link" href="{% url 'listar_asignaciones' %}">Volver al listado</a>
+    </div>
 </body>
 </html>

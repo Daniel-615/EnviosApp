@@ -4,13 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de Transportistas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+            background-color: #007BFF;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        /* Asegurar visibilidad del texto en los enlaces de acciones */
+        .actions a {
+            color: #fff !important;
+            font-weight: bold;
+            text-decoration: underline !important;
+        }
+
+        /* Cambiar el color cuando se hace hover */
+        .actions a:hover {
+            color: #0056b3 !important;
+        }
+
+        .no-data {
+            text-align: center;
+            color: #777;
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
+
     <h1>Listado de Transportistas</h1>
 
-    <a href="{% url 'crear_transportista' %}">Crear Nuevo Transportista</a>
+    <div style="text-align: center;">
+        <a href="{% url 'crear_transportista' %}">Crear Nuevo Transportista</a>
+    </div>
 
-    <table border="1">
+    <table>
         <thead>
             <tr>
                 <th>Nombre</th>
@@ -25,24 +100,28 @@
         <tbody>
             {% for transportista in transportistas %}
             <tr>
-                <td>{{ transportista.nombre }}</td>
-                <td>{{ transportista.apellido }}</td>
-                <td>{{ transportista.dpi }}</td>
-                <td>{{ transportista.licencia }}</td>
-                <td>{{ transportista.correo }}</td>
-                <td>{{ transportista.telefono }}</td>
-                <td>
-                    <a href="{% url 'actualizar_transportista' transportista.id_transportista %}">Editar</a> |
+                <td>{{ transportista.nombre_transportista }}</td>
+                <td>{{ transportista.apellido_transportista }}</td>
+                <td>{{ transportista.dpi_transportista }}</td>
+                <td>{{ transportista.licencia_transportista }}</td>
+                <td>{{ transportista.correo_transportista }}</td>
+                <td>{{ transportista.telefono_transportista }}</td>
+                <td class="actions">
+                    <a href="{% url 'actualizar_transportista' transportista.id_transportista %}">Editar</a>
+                    <a href="{% url 'eliminar_transportista' transportista.id_transportista %}">Eliminar</a>
                 </td>
             </tr>
             {% empty %}
             <tr>
-                <td colspan="7">No hay transportistas registrados.</td>
+                <td colspan="7" class="no-data">No hay transportistas registrados.</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <a href="{% url 'home' %}">Volver al inicio</a>
+    <div style="text-align: center;">
+        <a href="{% url 'home' %}">Volver al inicio</a>
+    </div>
+
 </body>
 </html>
