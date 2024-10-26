@@ -5,24 +5,15 @@ class Cliente(models.Model):
     id_cliente = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False
     )
-    remitente = models.CharField(
+    nombre = models.CharField(
         max_length=30, blank=False, null=False
     )
-    telefono_remitente = models.CharField(
+    telefono = models.CharField(
         max_length=20, blank=False, null=False,
-    )
-    destinatario = models.CharField(
-        max_length=30, blank=False, null=False
-    )
-    telefono_destinatario = models.CharField(
-        max_length=20, blank=False, null=False,
-    )
-    
-    class Meta:
-        indexes = [models.Index(fields=['telefono_remitente']), models.Index(fields=['telefono_destinatario'])]
+        )
 
     def __str__(self):
-        return f'{self.remitente} -> {self.destinatario}'
+        return f'{self.nombre} -> {self.telefono}'
 
 
 class Transportista(models.Model):

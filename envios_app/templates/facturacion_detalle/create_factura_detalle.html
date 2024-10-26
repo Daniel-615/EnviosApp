@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Detalle de Factura</title>
+</head>
+<body>
+    <h1>Crear Detalle de Factura</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="descripcion">Descripción:</label>
+        <input type="text" id="descripcion" name="descripcion" required>
+
+        <label for="cantidad">Cantidad:</label>
+        <input type="number" id="cantidad" name="cantidad" required>
+
+        <label for="precio">Precio:</label>
+        <input type="number" id="precio" name="precio" required>
+
+        <button type="submit">Guardar</button>
+    </form>
+    <a href="{% url 'listar_factura_detalle' %}">Volver a la lista</a>
+</body>
+</html>

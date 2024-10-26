@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Facturas</title>
+</head>
+<body>
+    <h1>Lista de Facturas</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Total</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for factura in facturas %}
+            <tr>
+                <td>{{ factura.cliente_id.nombre }}</td>
+                <td>{{ factura.fecha }}</td>
+                <td>{{ factura.total }}</td>
+                <td>
+                    <a href="{% url 'actualizar_factura' factura.id_factura %}">Editar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'crear_factura' %}">Crear Factura</a>
+</body>
+</html>

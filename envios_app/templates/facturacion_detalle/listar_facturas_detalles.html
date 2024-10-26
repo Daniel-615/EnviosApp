@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalles de Factura</title>
+</head>
+<body>
+    <h1>Detalles de Factura</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Factura</th>
+                <th>Descripción</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for detalle in detalles %}
+            <tr>
+                <td>{{ detalle.factura_id.id_factura }}</td>
+                <td>{{ detalle.descripcion }}</td>
+                <td>{{ detalle.cantidad }}</td>
+                <td>{{ detalle.precio }}</td>
+                <td>
+                    <a href="{% url 'actualizar_factura_detalle' detalle.id_factura_detalle %}">Editar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'crear_factura_detalle' factura_id=1 %}">Agregar Detalle</a>
+</body>
+</html>

@@ -325,130 +325,75 @@ def actualizar_ubicacion(request, id_ubicacion):
         ubicacion.referencias=request.POST.get('referencias')
         ubicacion.save()  
         return redirect('listar_ubicaciones')
-#FACTURA
+
+def listar_clientes(request):
+    clientes=Cliente.objects.all()
+    return render(request,'cliente/listar_clientes.html',{'clientes':clientes})
+def crear_cliente(request):
+    if request.method=='GET':
+        return render(request,'cliente/create_cliente.html')
+    if request.method=='POST':
+        nombre=request.POST.get('remitente')
+        telefono=request.POST.get('telefono')
+
+        nuevo_cliente=Cliente(
+            nombre=nombre,
+            telefono=telefono
+        )
+        nuevo_cliente.save()
+        return redirect('listar_clientes')
+def actualizar_cliente(request,client_id):
+    cliente=get_object_or_404(Cliente,client_id=client_id)
+    if request.method=='GET':
+        return render('cliente/update_cliente.html',{'cliente':cliente})
+    if request.method=='POST':
+        telefono=request.POST.get('telefono')
+        nombre=request.POST.get('nombre')
+        cliente.telefono=telefono
+        cliente.nombre=nombre
+        cliente.save()
+        return redirect('listar_clientes')
+    
+def listar_facturas(request):
+    facturas = Facturacion.objects.all()
+    return render(request, 'facturacion/listar_facturas.html', {'facturas': facturas})
+
 def crear_factura(request):
+    if request.method=='GET':
+        clientes = Cliente.objects.all()
+        return render(request, 'facturacion/create_facturacion.html', {'clientes': clientes})
     if request.method == 'POST':
         cliente_id = request.POST.get('cliente')
         fecha = request.POST.get('fecha')
         total = request.POST.get('total')
 
+        cliente=get_object_or_404(Cliente,cliente_id=cliente_id)
         nueva_factura = Facturacion(
-            cliente_id=cliente_id,
+            cliente_id=cliente,
             fecha=fecha,
             total=total
         )
         nueva_factura.save()
-        messages.success(request, "La factura ha sido creada exitosamente.")
         return redirect('listar_facturas')
 
-    clientes = Cliente.objects.all()
-    return render(request, 'factura/create_factura.html', {'clientes': clientes})
+def listar_factura_detalle(request):
+    detalles = FacturacionDetalle.objects.all()
+    return render(request, 'facturacion_detalle/listar_facturas_detalles.html', {'detalles': detalles})
 
-def listar_facturas(request):
-    facturas = Facturacion.objects.all()
-    return render(request, 'factura/list_facturas.html', {'facturas': facturas})
-
-def actualizar_factura(request, id_factura):
-    factura = get_object_or_404(Facturacion, id_factura=id_factura)
-    clientes = Cliente.objects.all()
+def crear_factura_detalle(request,factura_id):
+    factura=get_object_or_404(Facturacion,factura_id=factura_id)
     if request.method=='GET':
-      
-        return render(request, 'factura/update_factura.html', {'factura': factura, 'clientes': clientes})
+        return render(request, 'facturacion_detalle/create_factura_detalle.html', {'facturas': factura})
     if request.method == 'POST':
-        factura.cliente_id = request.POST.get('cliente')
-        factura.fecha = request.POST.get('fecha')
-        factura.total = request.POST.get('total')
-        factura.save()
-
-        return redirect('listar_facturas')
-
-
-
-#FACTURA DETALLE
-def crear_factura_detalle(request):
-    facturas = Facturacion.objects.all()
-    if request.method=='GET':
-        return render(request, 'factura/create_factura_detalle.html', {'facturas': facturas})
-    if request.method == 'POST':
-        factura_id = request.POST.get('factura')
         descripcion = request.POST.get('descripcion')
         cantidad = request.POST.get('cantidad')
         precio = request.POST.get('precio')
 
         nuevo_detalle = FacturacionDetalle(
-            factura_id=factura_id,
+            factura_id=factura,
             descripcion=descripcion,
             cantidad=cantidad,
             precio=precio
         )
         nuevo_detalle.save()
         return redirect('listar_factura_detalle')
-
-
-
-def listar_factura_detalle(request):
-    detalles = FacturacionDetalle.objects.all()
-    return render(request, 'factura/list_factura_detalle.html', {'detalles': detalles})
-
-def actualizar_factura_detalle(request, id):
-    detalle = get_object_or_404(FacturacionDetalle, id=id)
-
-    if request.method == 'POST':
-        detalle.factura_id = request.POST.get('factura')
-        detalle.descripcion = request.POST.get('descripcion')
-        detalle.cantidad = request.POST.get('cantidad')
-        detalle.precio = request.POST.get('precio')
-        detalle.save()
-
-        messages.success(request, "El detalle de la factura ha sido actualizado exitosamente.")
-        return redirect('listar_factura_detalle')
-
-    facturas = Facturacion.objects.all()
-    return render(request, 'factura/update_factura_detalle.html', {'detalle': detalle, 'facturas': facturas})
-
-
-#ELIMINAR 
-
-
-
-
-
-def eliminar_paquete(request, id):
-    paquete = get_object_or_404(Paquete, id=id)
-    
-    if request.method == 'POST':
-        paquete.delete()
-        messages.success(request, "El paquete ha sido eliminado exitosamente.")
-        return redirect('listar_paquetes')
-    
-    return render(request, 'paquete/delete_paquete.html', {'paquete': paquete})
-
-def eliminar_envio(request, id):
-    envio = get_object_or_404(Envio, id=id)
-    
-    if request.method == 'POST':
-        envio.delete()
-        messages.success(request, "El envío ha sido eliminado exitosamente.")
-        return redirect('listar_envios')
-    
-    return render(request, 'envios/delete_envio.html', {'envio': envio})
-
-def eliminar_factura(request, id):
-    factura = get_object_or_404(Facturacion, id=id)
-    
-    if request.method == 'POST':
-        factura.delete()
-        messages.success(request, "La factura ha sido eliminada exitosamente.")
-        return redirect('listar_facturas')
-    
-    return render(request, 'factura/delete_factura.html', {'factura': factura})
-
-def eliminar_factura_detalle(request, id):
-    detalle = get_object_or_404(FacturacionDetalle, id=id)
-    
-    if request.method == 'POST':
-        detalle.delete()
-        messages.success(request, "El detalle de la factura ha sido eliminado exitosamente.")
-        return redirect('listar_factura_detalle')
-    
-    return render(request, 'factura/delete_factura_detalle.html', {'detalle': detalle})

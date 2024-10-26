@@ -6,11 +6,14 @@ from .views import (
     eliminar_transportista,eliminar_vehiculo,listar_rastreo,crear_rastreo,actualizar_rastreo,
     listar_paquetes, crear_paquete,actualizar_paquete,listar_envios,
     actualizar_envio,crear_envio,listar_ubicaciones,
-    crear_ubicacion, actualizar_ubicacion
+    crear_ubicacion, actualizar_ubicacion,listar_facturas,crear_factura,
+    listar_factura_detalle,crear_factura_detalle,
+    listar_clientes,crear_cliente,actualizar_cliente
 )
 
 urlpatterns = [
     path('',home,name='home'),
+
     path('asignaciones/crear/',crear_asignacion,name='crear_asignacion'),
     path('asignaciones/listar/',listar_asignaciones,name='listar_asignaciones'),
     path('asignaciones/editar/<uuid:id_asignacion>/', actualizar_asignacion, name='actualizar_asignacion'),
@@ -41,5 +44,14 @@ urlpatterns = [
     path('ubicacion/crear/',crear_ubicacion,name='crear_ubicacion'),
     path('ubicacion/editar/<uuid:id_ubicacion>/',actualizar_ubicacion,name='actualizar_ubicacion'),
 
+    path('facturas/listar/',listar_facturas,name='listar_facturas'),
+    path('facturas/crear/',crear_factura,name='crear_factura'),
 
+    path('facturas/listar/detalle/',listar_factura_detalle,name='listar_facturas_detalle'),
+    path('facturas/crear/detalle/',crear_factura_detalle,name='crear_factura_detalle'),
+  
+
+    path('clientes/listar/',listar_clientes,name='listar_clientes'),
+    path('clientes/crear/',crear_cliente,name='crear_cliente'),
+    path('clientes/editar/<uuid:cliente_id>/',actualizar_cliente,name='actualizar_cliente'),
 ]
