@@ -16,7 +16,7 @@
         <label for="id_envio">ID Envío:</label>
         <select id="id_envio" name="id_envio" required>
             {% for envio in Envios %}
-                <option value="{{ envio.id_envio }}">{{ envio.estado_envio }}</option>
+                <option value="{{ envio.id_envio }}">{{envio.fecha_creacion}} : {{ envio.estado_envio }}</option>
             {% endfor %}
         </select>
         

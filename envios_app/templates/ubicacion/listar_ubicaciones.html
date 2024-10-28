@@ -6,39 +6,48 @@
     <title>Lista de Ubicaciones</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'ubicacion/ubicacion_listar.css' %}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> <!-- Bootstrap -->
 </head>
-<body>
-    <h1>Lista de Ubicaciones</h1>
-    
-    <a href="{% url 'crear_ubicacion' %}" class="button">Crear Nueva Ubicación</a>
+<body class="bg-light">
 
-    <table>
-        <thead>
-            <tr>
-                <th>Calle</th>
-                <th>Ciudad</th>
-                <th>Código Postal</th>
-                <th>Cliente</th>
-                <th>Coordenadas</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for ubicacion in ubicaciones %}
+    <div class="container">
+        <h1 class="text-center text-primary my-4">Lista de Ubicaciones</h1>
+
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
                 <tr>
-                    <td>{{ ubicacion.calle }}</td>
-                    <td>{{ ubicacion.ciudad }}</td>
-                    <td>{{ ubicacion.codigo_postal }}</td>
-                    <td>{{ ubicacion.id_cliente.nombre }}</td>
-                    <td>{{ ubicacion.coordenadas_geograficas }}</td>
-                    <td>
-                        <a href="{% url 'actualizar_ubicacion' ubicacion.id_ubicacion %}">Editar</a>
-                    </td>
+                    <th>Calle</th>
+                    <th>Ciudad</th>
+                    <th>Código Postal</th>
+                    <th>Cliente</th>
+                    <th>Coordenadas</th>
+                    <th>Acciones</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for ubicacion in ubicaciones %}
+                    <tr>
+                        <td>{{ ubicacion.calle }}</td>
+                        <td>{{ ubicacion.ciudad }}</td>
+                        <td>{{ ubicacion.codigo_postal }}</td>
+                        <td>{{ ubicacion.id_cliente.nombre }}</td>
+                        <td>{{ ubicacion.coordenadas_geograficas }}</td>
+                        <td>
+                            <a href="{% url 'actualizar_ubicacion' ubicacion.id_ubicacion %}" class="btn btn-warning btn-sm">Editar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-    <a href="{% url 'home' %}" class="button">Volver a Inicio</a>
+        <div class="d-flex justify-content-center mt-4">
+            <a href="{% url 'crear_ubicacion' %}" class="btn btn-success mr-2">Crear Nueva Ubicación</a>
+            <a href="{% url 'home' %}" class="btn btn-secondary">Volver a Inicio</a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

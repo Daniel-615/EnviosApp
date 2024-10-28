@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado del Envío</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'envio/resultado.css' %}">
+</head>
+<body>
+
+<div class="result-container">
+    {% if envio %}
+        <h2>Detalles del Envío</h2>
+        <p><strong>Código de Rastreo:</strong> {{ envio.codigo_rastreo }}</p>
+        <p><strong>Estado del Envío:</strong> {{ envio.estado_envio }}</p>
+
+        {% if envio.id_asignacion %}
+            <h3>Información de la Asignación</h3>
+            <p><strong>Transportista:</strong> {{ envio.id_asignacion.id_transportista.nombre_transportista }} {{ envio.id_asignacion.id_transportista.apellido_transportista }}</p>
+            <p><strong>Fecha de Asignación:</strong> {{ envio.id_asignacion.fecha_asignacion }}</p>
+        {% endif %}
+
+        {% if envio.id_ubicacion %}
+            <h3>Ubicación Registrada</h3>
+            <p><strong>Ciudad:</strong> {{ envio.id_ubicacion.ciudad }}</p>
+            <p><strong>Coordenadas:</strong> {{ envio.id_ubicacion.calle }}</p>
+        {% endif %}
+
+        {% if rastreo %}
+            <h3>Historial de Rastreo</h3>
+            <ul>
+                {% for evento in rastreo %}
+                    <li>
+                        <p><strong>Ubicacion actual:</strong> {{ evento.ubicacion_actual }}</p>
+                        <p><strong>Estado:</strong> {{ evento.estado_paquete }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No hay información de rastreo disponible.</p>
+        {% endif %}
+        
+    {% else %}
+        <p>No se encontró ningún envío con el código de rastreo ingresado.</p>
+    {% endif %}
+    <a href="{%url 'home'%}">Inicio</a>
+</div>
+
+</body>
+</html>

@@ -8,11 +8,12 @@ from .views import (
     actualizar_envio,crear_envio,listar_ubicaciones,
     crear_ubicacion, actualizar_ubicacion,listar_facturas,crear_factura,
     listar_factura_detalle,crear_factura_detalle,
-    listar_clientes,crear_cliente,actualizar_cliente
+    listar_clientes,crear_cliente,actualizar_cliente,buscar_envio,contactos
 )
 
 urlpatterns = [
     path('',home,name='home'),
+    path('contactos/',contactos,name='contactos'),
 
     path('asignaciones/crear/',crear_asignacion,name='crear_asignacion'),
     path('asignaciones/listar/',listar_asignaciones,name='listar_asignaciones'),
@@ -39,6 +40,7 @@ urlpatterns = [
     path('envios/listar/',listar_envios,name='listar_envios'),
     path('envios/crear/',crear_envio,name='crear_envio'),
     path('envios/editar/<uuid:id_envio>/',actualizar_envio,name='actualizar_envio'),
+    path('consultar/envio',buscar_envio,name='buscar_envio'),
 
     path('ubicacion/listar',listar_ubicaciones,name='listar_ubicaciones'),
     path('ubicacion/crear/',crear_ubicacion,name='crear_ubicacion'),

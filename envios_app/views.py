@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from .models import Cliente,Vehiculo,Facturacion,FacturacionDetalle,Rastreo,Ubicacion,Transportista,Envio,Paquete,AsignacionVehiculoTransportista as Asignacion 
 from django.contrib import messages
-
+from django.views.decorators.csrf import csrf_exempt
 
 def home(request):
     return render(request, 'home.html')  
-
+def contactos(request):
+    return render(request,'contacto.html')
 def listar_vehiculos(request):
     vehiculos = Vehiculo.objects.all().filter(activo=True)  
     return render(request, 'vehiculo/listar_vehiculos.html', {'vehiculos': vehiculos})
@@ -411,3 +412,20 @@ def crear_factura_detalle(request, factura_id):
         )
         nuevo_detalle.save()
         return redirect('listar_factura_detalle')
+    
+@csrf_exempt
+def buscar_envio(request):
+    if request.method == 'GET':
+        return render(request, 'envio/consultar.html')
+    elif request.method == 'POST':
+        codigo = request.POST.get('codigo')
+        envio = None
+        rastreo = None  
+        if codigo:
+            envio = Envio.objects.filter(codigo_rastreo=codigo).select_related('id_asignacion', 'id_ubicacion').first()
+            if envio: 
+                rastreo = Rastreo.objects.filter(id_envio=envio.id_envio)
+        return render(request, 'envio/resultado_envio.html', {
+            'envio': envio,
+            'rastreo': rastreo
+        })

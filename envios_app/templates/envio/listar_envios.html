@@ -30,13 +30,18 @@
                     <td>{{ envio.estado_envio }}</td>
                     <td>{{ envio.codigo_rastreo }}</td>
                     <td>
-                        <a href="{% url 'actualizar_envio' envio.id_envio %}">Actualizar</a>
+                        <a href="{% url 'actualizar_envio' envio.id_envio %}" class="button">Actualizar</a>
                     </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <a href="{% url 'crear_envio' %}">Crear nuevo envío</a>
+    <div class="button-container">
+        <a href="{% url 'crear_envio' %}" class="button">Crear nuevo envío</a>
+    </div>
+    <div class="button-container">
+        <a href="{% url 'home' %}" class="button">Regresar al Inicio</a>
+    </div>
 </body>
 </html>

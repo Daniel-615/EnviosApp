@@ -4,166 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página de Inicio - Envios</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-
-        header {
-            background-color: #007BFF;
-            color: #fff;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-        }
-
-        h1 {
-            margin: 0;
-            font-size: 24px;
-        }
-
-        /* Menú hamburguesa */
-        .hamburger-menu {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-        }
-
-        .hamburger-menu div {
-            width: 30px;
-            height: 4px;
-            background-color: white;
-            margin: 5px 0;
-            transition: 0.4s;
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-        }
-
-        ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-        }
-
-        ul li {
-            margin-right: 20px;
-        }
-
-        ul li a {
-            text-decoration: none;
-            color: white;
-            font-size: 16px;
-            padding: 10px 15px;
-            display: inline-block;
-        }
-
-        ul li a:hover {
-            background-color: #0056b3;
-            border-radius: 5px;
-        }
-
-        .menu-links {
-            display: flex;
-        }
-
-        .content {
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        .content p {
-            font-size: 18px;
-            color: #333;
-        }
-
-        .content a {
-            text-decoration: none;
-            color: white;
-            background-color: #007BFF;
-            padding: 12px 30px;
-            border-radius: 5px;
-            font-size: 18px;
-        }
-
-        .content a:hover {
-            background-color: #0056b3;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #007BFF;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-
-        /* Iconos */
-        .menu-links li a::before {
-            content: "";
-            margin-right: 10px;
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
-        /* Iconos personalizados */
-        .menu-links li:nth-child(1) a::before {
-            background-image: url('https://img.icons8.com/ios-filled/50/ffffff/home.png');
-        }
-
-        .menu-links li:nth-child(2) a::before {
-            background-image: url('https://img.icons8.com/ios-filled/50/ffffff/delivery.png');
-        }
-
-        .menu-links li:nth-child(3) a::before {
-            background-image: url('https://img.icons8.com/ios-filled/50/ffffff/packaging.png');
-        }
-
-        .menu-links li:nth-child(4) a::before {
-            background-image: url('https://img.icons8.com/ios-filled/50/ffffff/contacts.png');
-        }
-
-        /* Responsivo */
-        @media (max-width: 768px) {
-            .hamburger-menu {
-                display: flex;
-            }
-
-            ul {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 60px;
-                right: 0;
-                background-color: #007BFF;
-                width: 100%;
-                text-align: center;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            }
-
-            ul.show {
-                display: flex;
-            }
-
-            ul li {
-                margin: 10px 0;
-            }
-        }
-    </style>
+    {% load static%}
+    <link rel="stylesheet" href="{%static 'home.css'%}">
 </head>
 <body>
 
@@ -177,29 +19,32 @@
         </div>
         <ul class="menu-links">
             <li><a href="{% url 'home' %}">Inicio</a></li>
-            <li><a href="{% url 'listar_transportistas' %}">Transportistas</a></li>
-            <li><a href="#">Pedidos</a></li>
-            <li><a href="#">Contactos</a></li>
+            <li class="dropdown">
+                <a href="#">Opciones</a>
+                <div class="dropdown-content">
+                    <a href="{% url 'listar_transportistas' %}">Transportistas</a>
+                    <a href="{% url 'listar_vehiculos' %}">Vehículos</a>
+                    <a href="{% url 'listar_asignaciones' %}">Asignaciones</a>
+                    <a href="{% url 'listar_rastreos' %}">Rastreos</a>
+                    <a href="{% url 'listar_paquetes' %}">Paquetes</a>
+                    <a href="{% url 'listar_envios' %}">Envíos</a>
+                    <a href="{% url 'listar_ubicaciones' %}">Ubicaciones</a>
+                    <a href="{% url 'listar_clientes' %}">Clientes</a>
+                    <a href="{% url 'listar_facturas' %}">Facturas</a>
+                </div>
+            </li>
+            <li><a href="{%url 'contactos'%}">Contactos</a></li>
         </ul>
     </nav>
 </header>
 
 <div class="content">
-    <a href="{% url 'listar_transportistas' %}">Ver Transportistas</a>
-    <a href="{% url 'listar_vehiculos' %}">Ver Vehiculos</a>
-    <a href="{% url 'listar_asignaciones' %}">Ver Asignaciones</a>
-    <a href="{% url 'listar_rastreos' %}">Ver Rastreos</a>
-    <a href="{% url 'listar_paquetes'%}">Ver Paquetes</a>
-    
+    <p>Bienvenido a Envíos Express, su servicio confiable para todos sus envíos.</p>
+    <a href="{%url 'buscar_envio'%}">Consulta Envio</a>
 </div>
-<div class="content">
-    <a href="{% url 'listar_envios'%}">Ver Envios</a>
-    <a href="{% url 'listar_ubicaciones' %}">Ver Ubicaciones</a>
-    <a href="{% url 'listar_clientes'%}">Ver Clientes</a>
-    <a href="{%url 'listar_facturas'%}">Ver Facturas</a>
-</div>
+
 <footer>
-    <p>&copy; 2024 Envíos Express. Todos los derechos reservados developed.</p>
+    <p>&copy; 2024 Envíos Express. Todos los derechos reservados.</p>
 </footer>
 
 <script>

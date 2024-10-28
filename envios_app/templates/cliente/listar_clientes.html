@@ -5,7 +5,6 @@
     <title>Lista de Clientes</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'cliente/cliente_listar.css' %}">
-</head>
 <body>
 
 <header>
@@ -19,8 +18,8 @@
         <ul class="menu-links">
             <li><a href="{% url 'home' %}">Inicio</a></li>
             <li><a href="{% url 'listar_transportistas' %}">Transportistas</a></li>
-            <li><a href="#">Pedidos</a></li>
-            <li><a href="#">Contactos</a></li>
+            <li><a href="{%url 'listar_paquetes'%}">Paquetes</a></li>
+            <li><a href="{%url 'contactos'%}">Contactos</a></li>
         </ul>
     </nav>
 </header>
@@ -46,7 +45,9 @@
         {% endfor %}
     </tbody>
 </table>
-<a href="{% url 'crear_cliente' %}">Crear Cliente</a>
+<div class="bootstrap-btn">
+    <a href="{% url 'crear_cliente' %}" class="crear-cliente-btn">Crear Cliente</a>
+</div>
 
 <script>
     function toggleMenu() {
