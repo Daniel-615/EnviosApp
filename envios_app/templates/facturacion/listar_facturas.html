@@ -3,31 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <title>Lista de Facturas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        a {
+            display: block;
+            margin: 20px 0;
+            text-align: center;
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h1>Lista de Facturas</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Cliente</th>
-                <th>Fecha</th>
-                <th>Total</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for factura in facturas %}
-            <tr>
-                <td>{{ factura.cliente_id.nombre }}</td>
-                <td>{{ factura.fecha }}</td>
-                <td>{{ factura.total }}</td>
-                <td>
-                    <a href="{% url 'actualizar_factura' factura.id_factura %}">Editar</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <a href="{% url 'crear_factura' %}">Crear Factura</a>
+    <div class="container">
+        <h1>Lista de Facturas</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for factura in facturas %}
+                <tr>
+                    <td>{{ factura.id_cliente.nombre }}</td>
+                    <td>
+                        <a href="{% url 'listar_factura_detalle' %}">Ver Detalles</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'crear_factura' %}">Crear Factura</a>
+    </div>
 </body>
 </html>

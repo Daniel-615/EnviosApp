@@ -47,8 +47,8 @@ urlpatterns = [
     path('facturas/listar/',listar_facturas,name='listar_facturas'),
     path('facturas/crear/',crear_factura,name='crear_factura'),
 
-    path('facturas/listar/detalle/',listar_factura_detalle,name='listar_facturas_detalle'),
-    path('facturas/crear/detalle/',crear_factura_detalle,name='crear_factura_detalle'),
+    path('facturas/listar/detalle/',listar_factura_detalle,name='listar_factura_detalle'),
+    path('facturas/crear/detalle/<uuid:factura_id>/',crear_factura_detalle,name='crear_factura_detalle'),
   
 
     path('clientes/listar/',listar_clientes,name='listar_clientes'),

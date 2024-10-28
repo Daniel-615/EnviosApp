@@ -239,23 +239,19 @@ def actualizar_paquete(request, id_paquete):
 
     if request.method == 'POST':
         try:
-            # Extraer datos del formulario
             descripcion_paquete = request.POST.get('descripcion_paquete')
             peso = request.POST.get('peso')
             dimensiones = request.POST.get('dimensiones')
             valor_declarado = request.POST.get('valor_declarado')
 
-            # Validar que los datos no sean nulos
             if not descripcion_paquete:
                 raise ValueError("La descripción del paquete es obligatoria.")
 
-            # Actualizar los campos del paquete
             paquete.descripcion_paquete = descripcion_paquete
             paquete.peso = peso
             paquete.dimensiones = dimensiones
             paquete.valor_declarado = valor_declarado
 
-            # Guardar los cambios
             paquete.save()
             return redirect('listar_paquetes')
         except Exception as e:
@@ -384,36 +380,34 @@ def crear_factura(request):
         return render(request, 'facturacion/create_facturacion.html', {'clientes': clientes})
     if request.method == 'POST':
         cliente_id = request.POST.get('cliente')
-        fecha = request.POST.get('fecha')
-        total = request.POST.get('total')
 
-        cliente=get_object_or_404(Cliente,cliente_id=cliente_id)
+        cliente = get_object_or_404(Cliente, id_cliente=cliente_id)
         nueva_factura = Facturacion(
-            cliente_id=cliente,
-            fecha=fecha,
-            total=total
+            id_cliente=cliente
         )
         nueva_factura.save()
-        return redirect('listar_facturas')
+        return redirect('crear_factura_detalle',factura_id=nueva_factura.id_factura)
 
 def listar_factura_detalle(request):
     detalles = FacturacionDetalle.objects.all()
     return render(request, 'facturacion_detalle/listar_facturas_detalles.html', {'detalles': detalles})
 
-def crear_factura_detalle(request,factura_id):
-    factura=get_object_or_404(Facturacion,factura_id=factura_id)
-    if request.method=='GET':
-        return render(request, 'facturacion_detalle/create_factura_detalle.html', {'facturas': factura})
+def crear_factura_detalle(request, factura_id):
+    factura = get_object_or_404(Facturacion, id_factura=factura_id)
+    metodo_pago_choices = FacturacionDetalle._meta.get_field('metodo_pago').choices
+    if request.method == 'GET':
+        return render(request, 'facturacion_detalle/create_factura_detalle.html', {
+            'factura': factura,
+            'metodo_pago_choices': metodo_pago_choices
+        })
     if request.method == 'POST':
-        descripcion = request.POST.get('descripcion')
-        cantidad = request.POST.get('cantidad')
-        precio = request.POST.get('precio')
+        monto = request.POST.get('monto')
+        metodo_pago = request.POST.get('metodo')
 
         nuevo_detalle = FacturacionDetalle(
-            factura_id=factura,
-            descripcion=descripcion,
-            cantidad=cantidad,
-            precio=precio
+            id_factura=factura,
+            monto_total=monto,
+            metodo_pago=metodo_pago
         )
         nuevo_detalle.save()
         return redirect('listar_factura_detalle')
