@@ -4,69 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Confirmar Eliminación</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f6f9;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .container {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px;
-            text-align: center;
-        }
-
-        h1 {
-            color: #333;
-        }
-
-        p {
-            font-size: 1.1rem;
-            color: #666;
-        }
-
-        .actions {
-            margin-top: 20px;
-        }
-
-        .actions form {
-            display: inline-block;
-            margin-right: 10px;
-        }
-
-        button, a {
-            padding: 10px 15px;
-            font-size: 1rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        button {
-            background-color: #dc3545;
-            color: white;
-        }
-
-        a {
-            background-color: #007bff;
-            color: white;
-        }
-
-        button:hover, a:hover {
-            opacity: 0.9;
-        }
-    </style>
+    {% load static%}
+    <link rel="stylesheet" href="{% static 'vehiculo/confirmar.css'%}">
 </head>
 <body>
     <div class="container">

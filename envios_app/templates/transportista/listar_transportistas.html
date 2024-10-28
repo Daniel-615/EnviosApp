@@ -4,78 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de Transportistas</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-
-        a {
-            text-decoration: none;
-            color: #fff;
-            background-color: #007BFF;
-            padding: 10px 20px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            display: inline-block;
-        }
-
-        a:hover {
-            background-color: #0056b3;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #007BFF;
-            color: white;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        tr:hover {
-            background-color: #ddd;
-        }
-
-        /* Asegurar visibilidad del texto en los enlaces de acciones */
-        .actions a {
-            color: #fff !important;
-            font-weight: bold;
-            text-decoration: underline !important;
-        }
-
-        /* Cambiar el color cuando se hace hover */
-        .actions a:hover {
-            color: #0056b3 !important;
-        }
-
-        .no-data {
-            text-align: center;
-            color: #777;
-            font-style: italic;
-        }
-    </style>
+    {%load static%}
+    <link rel="stylesheet" href="{%static 'transportista/listar.css'%}">
 </head>
 <body>
 
