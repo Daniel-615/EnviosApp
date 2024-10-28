@@ -1,0 +1,231 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0; /* Eliminado el padding */
+}
+
+/* Header styling */
+header {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px; /* Ajustado el padding */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Hamburger menu styling */
+.hamburger-menu {
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 20; /* Make sure it’s above the content */
+}
+
+.hamburger-menu div {
+    width: 30px;
+    height: 4px;
+    background-color: white;
+    margin: 5px 0;
+    transition: 0.4s;
+}
+
+/* Navigation styling */
+nav {
+    display: flex;
+    align-items: center;
+}
+
+/* Unordered list styling */
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex; /* Show links in a row by default */
+}
+
+/* List items styling */
+ul li {
+    margin-right: 20px; /* Space between menu items */
+}
+
+/* Anchor link styling */
+ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    padding: 10px 15px;
+    display: inline-block;
+}
+
+/* Anchor link hover effect */
+ul li a:hover {
+    background-color: #0056b3;
+    border-radius: 5px;
+}
+
+/* Responsive Hamburger Menu */
+@media (max-width: 768px) {
+    .hamburger-menu {
+        display: flex; /* Show the hamburger menu */
+    }
+
+    /* Hide menu links initially */
+    ul {
+        display: none; /* Hidden by default */
+        flex-direction: column; /* Vertical layout */
+        position: absolute;
+        top: 60px; /* Adjust this based on your header height */
+        right: 0;
+        background-color: #007BFF;
+        width: 100%; /* Full width */
+        text-align: center; /* Center align text */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+    }
+
+    /* Show menu when toggle is active */
+    ul.show {
+        display: flex; /* Display the menu */
+    }
+
+    /* Spacing between items */
+    ul li {
+        margin: 10px 0; /* Space between items */
+    }
+}
+
+/* Page heading */
+h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+h1 {
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+}
+/* Table styling */
+table {
+    width: 80%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Table header and data styling */
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    color: #555;
+}
+
+th {
+    background-color: #007bff;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #e9ecef;
+}
+
+/* Links in table */
+td a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+td a:hover {
+    color: #0056b3;
+}
+
+/* Button link for "Crear Cliente" */
+a[href*='crear_cliente'] {
+    margin-top: 15px;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #28a745;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+a[href*='crear_cliente']:hover {
+    background-color: #218838;
+}
+
+/* Footer */
+footer {
+    background-color: #007BFF;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    z-index: 5;
+}
+
+/* Custom icons for the menu */
+.menu-links li:nth-child(1) a::before {
+    content: "";
+    margin-right: 10px;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url('https://img.icons8.com/ios-filled/50/ffffff/home.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.menu-links li:nth-child(2) a::before {
+    content: "";
+    margin-right: 10px;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url('https://img.icons8.com/ios-filled/50/ffffff/delivery.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.menu-links li:nth-child(3) a::before {
+    content: "";
+    margin-right: 10px;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url('https://img.icons8.com/ios-filled/50/ffffff/packaging.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.menu-links li:nth-child(4) a::before {
+    content: "";
+    margin-right: 10px;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url('https://img.icons8.com/ios-filled/50/ffffff/contacts.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}

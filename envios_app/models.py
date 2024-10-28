@@ -17,7 +17,7 @@ class Cliente(models.Model):
         indexes = [models.Index(fields=['telefono'])]
 
     def __str__(self):
-        return f'{self.remitente} -> {self.destinatario}'
+        return f'{self.nombre} -> {self.telefono}'
 
 
 class Transportista(models.Model):
@@ -152,7 +152,7 @@ class Envio(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f'Envío creado {self.codigo_rastreo}'
+        return f'{self.codigo_rastreo}'
 
 
 class Paquete(models.Model):

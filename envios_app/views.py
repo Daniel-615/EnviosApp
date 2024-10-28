@@ -168,26 +168,27 @@ def listar_rastreo(request):
     except Exception as e:
         messages.error(request,f'Error al listar rastreo : {e}')
 def crear_rastreo(request):
-    envios=Envio.objects.exclude(estado_envio='cancelado')
-    if request.method=='GET':
-        return render(request,'rastreo/create_rastreo.html',{'envios':envios})
-    if request.method=='POST':
+    envios = Envio.objects.exclude(estado_envio='cancelado')
+    if request.method == 'GET':
+        return render(request, 'rastreo/create_rastreo.html', {
+            'envios': envios,
+            'rastreo': Rastreo
+        })
+    if request.method == 'POST':
         try:
-            id_envio=request.POST.get('envio')
-            ubicacion_actual=request.POST.get('ubicacion')
-            estado_paquete=request.POST.get('estado')
-            observaciones=request.POST.get('observaciones')
-
-            nuevo_rastreo=Rastreo(
-                id_envio=id_envio,
+            id_envio = request.POST.get('envio')
+            ubicacion_actual = request.POST.get('ubicacion')
+            observaciones = request.POST.get('observaciones')
+            envio=get_object_or_404(Envio,id_envio=id_envio)
+            nuevo_rastreo = Rastreo(
+                id_envio=envio,
                 ubicacion_actual=ubicacion_actual,
-                estado_paquete=estado_paquete,
                 observaciones=observaciones
             )
             nuevo_rastreo.save()
             return redirect('listar_rastreos')
         except Exception as e:
-            messages.error(request,f'Error: {e}')
+            messages.error(request, f'Error: {e}')
 def actualizar_rastreo(request,id_rastreo):
     rastreo=get_object_or_404(Rastreo,id_rastreo=id_rastreo)
     if request.method=='GET':
@@ -196,16 +197,14 @@ def actualizar_rastreo(request,id_rastreo):
         try:
             ubicacion_actual=request.POST.get('ubicacion')
             estado_paquete=request.POST.get('estado')
-            observaciones=request.POST.get('observacion')
 
             rastreo.ubicacion_actual=ubicacion_actual
             rastreo.estado_paquete=estado_paquete
-            rastreo.observaciones=observaciones
 
             rastreo.save()
-            return redirect('rastreo/listar_rastreos.html')
+            return redirect('listar_rastreos')
         except Exception as e:
-            messages.error(request,f'Error al crear el rastreo: {e}')
+            messages.error(request,f'Error al actualizar el rastreo: {e}')
 
 def listar_paquetes(request):
     paquetes = Paquete.objects.all()
@@ -213,8 +212,8 @@ def listar_paquetes(request):
 
 def crear_paquete(request):
     if request.method=='GET':
-        envios=Envio.objects.all()
-        return render(request,'paquete/create_paquete.html',{'Envios': envios,})
+        envios=Envio.objects.all().filter(estado_envio='pendiente')
+        return render(request,'paquete/create_paquete.html',{'Envios': envios})
     if request.method=='POST':
         id_envio=request.POST.get('id_envio')
         descripcion_paquete=request.POST.get('descripcion_paquete')
@@ -233,16 +232,35 @@ def crear_paquete(request):
         nuevo_paquete.save()
         return redirect('listar_paquetes')
 def actualizar_paquete(request, id_paquete):
-    paquete = get_object_or_404(Paquete, id_paquete=id_paquete) 
-    if request.method == 'GET':
-        return render(request, 'Paquete/update_paquete.html', {'paquete': paquete})
-    
-    if request.method == 'POST':
-        descripcion_paquete = request.POST.get('descripcion')
-        paquete.descripcion_paquete = descripcion_paquete
-        paquete.save()
+    paquete = get_object_or_404(Paquete, id_paquete=id_paquete)
 
-        return redirect('list_paquete')
+    if request.method == 'GET':
+        return render(request, 'paquete/editar_paquete.html', {'paquete': paquete})
+
+    if request.method == 'POST':
+        try:
+            # Extraer datos del formulario
+            descripcion_paquete = request.POST.get('descripcion_paquete')
+            peso = request.POST.get('peso')
+            dimensiones = request.POST.get('dimensiones')
+            valor_declarado = request.POST.get('valor_declarado')
+
+            # Validar que los datos no sean nulos
+            if not descripcion_paquete:
+                raise ValueError("La descripción del paquete es obligatoria.")
+
+            # Actualizar los campos del paquete
+            paquete.descripcion_paquete = descripcion_paquete
+            paquete.peso = peso
+            paquete.dimensiones = dimensiones
+            paquete.valor_declarado = valor_declarado
+
+            # Guardar los cambios
+            paquete.save()
+            return redirect('listar_paquetes')
+        except Exception as e:
+            messages.error(request, f'Error al actualizar el paquete: {e}')
+            return render(request, 'paquete/editar_paquete.html', {'paquete': paquete})
 
 def listar_envios(request):
     envios=Envio.objects.all()
@@ -254,14 +272,14 @@ def crear_envio(request):
         ubicaciones = Ubicacion.objects.all()    
         return render(request, 'envio/create_envio.html', {
             'asignaciones': asignaciones,
-            'ubicaciones': ubicaciones
+            'ubicaciones': ubicaciones,
+            'Envio':Envio
         })
     if request.method == 'POST':
         try:
             id_asignacion = request.POST.get('asignacion')
             id_ubicacion = request.POST.get('ubicacion')
             estado_envio = request.POST.get('estado')
-            codigo_rastreo = request.POST.get('rastreo')
 
             asignacion=get_object_or_404(Asignacion,id_asignacion=id_asignacion)
             ubicacion=get_object_or_404(Ubicacion,id_ubicacion=id_ubicacion)
@@ -269,7 +287,6 @@ def crear_envio(request):
                 id_asignacion=asignacion,
                 id_ubicacion=ubicacion,
                 estado_envio=estado_envio,
-                codigo_rastreo=codigo_rastreo
             )
 
             nuevo_envio.save()
@@ -281,7 +298,10 @@ def crear_envio(request):
 def actualizar_envio(request, id_envio):
     envio = get_object_or_404(Envio, id_envio=id_envio)  
     if request.method == 'GET':
-        return render(request, 'envio/update_envio.html', {'envio': envio})
+        return render(request, 'envio/update_envio.html', {
+            'envio': envio,
+            'Envio':Envio
+        })
     if request.method == 'POST':
         estado_envio = request.POST.get('estado')
         envio.estado_envio = estado_envio
@@ -305,7 +325,7 @@ def crear_ubicacion(request):
         referencias=request.POST.get('referencias')
         coordenadas_geograficas=request.POST.get('coordenadas')
 
-        cliente=get_object_or_404(Ubicacion,id_cliente=id_cliente)
+        cliente=get_object_or_404(Cliente,id_cliente=id_cliente)
         nueva_ubicacion = Ubicacion(
             calle=calle,
             ciudad=ciudad,
@@ -333,7 +353,7 @@ def crear_cliente(request):
     if request.method=='GET':
         return render(request,'cliente/create_cliente.html')
     if request.method=='POST':
-        nombre=request.POST.get('remitente')
+        nombre=request.POST.get('nombre')
         telefono=request.POST.get('telefono')
 
         nuevo_cliente=Cliente(
@@ -342,10 +362,10 @@ def crear_cliente(request):
         )
         nuevo_cliente.save()
         return redirect('listar_clientes')
-def actualizar_cliente(request,client_id):
-    cliente=get_object_or_404(Cliente,client_id=client_id)
+def actualizar_cliente(request,id_cliente):
+    cliente=get_object_or_404(Cliente,id_cliente=id_cliente)
     if request.method=='GET':
-        return render('cliente/update_cliente.html',{'cliente':cliente})
+        return render(request,'cliente/update_cliente.html',{'cliente':cliente})
     if request.method=='POST':
         telefono=request.POST.get('telefono')
         nombre=request.POST.get('nombre')

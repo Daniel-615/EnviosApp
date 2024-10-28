@@ -31,15 +31,17 @@
         <label for="ubicacion">Ubicación:</label>
         <select id="ubicacion" name="ubicacion" required>
             {% for ubicacion in ubicaciones %}
-                <option value="{{ ubicacion.id_ubicacion }}">{{ ubicacion.nombre }}</option>
+                <option value="{{ ubicacion.id_ubicacion }}">{{ ubicacion.calle }}</option>
             {% endfor %}
         </select>
 
         <label for="estado">Estado del Envío:</label>
-        <input type="text" id="estado" name="estado" required>
+        <select id="estado" name="estado" required>
+            {% for key, value in Envio.ESTADO_CHOICES %}
+                <option value="{{ key }}">{{ value }}</option>
+            {% endfor %}
+        </select>
 
-        <label for="rastreo">Código de Rastreo:</label>
-        <input type="text" id="rastreo" name="rastreo" required>
 
         <button type="submit">Crear Envío</button>
     </form>

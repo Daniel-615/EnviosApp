@@ -16,7 +16,7 @@
         <thead>
             <tr>
                 <th>ID Paquete</th>
-                <th>ID Envío</th>
+                <th>Codigo Rastreo</th>
                 <th>Descripción</th>
                 <th>Peso</th>
                 <th>Dimensiones</th>
@@ -25,16 +25,16 @@
             </tr>
         </thead>
         <tbody>
-            {% for paquete in paquetes %}
+            {% for paquete in Paquetes %}
             <tr>
-                <td>{{ paquete.id }}</td>
+                <td>{{ paquete.id_paquete }}</td>
                 <td>{{ paquete.id_envio }}</td>
                 <td>{{ paquete.descripcion_paquete }}</td>
                 <td>{{ paquete.peso }}</td>
                 <td>{{ paquete.dimensiones }}</td>
                 <td>{{ paquete.valor_declarado }}</td>
                 <td>
-                    <a href="{% url 'actualizar_paquete' paquete.id %}" class="button">Editar</a>
+                    <a href="{% url 'actualizar_paquete' paquete.id_paquete %}" class="button">Editar</a>
                 </td>
             </tr>
             {% empty %}

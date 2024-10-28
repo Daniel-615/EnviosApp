@@ -123,12 +123,9 @@
             <div class="form-group">
                 <label for="ubicacion">Ubicación Actual:</label>
                 <input type="text" id="ubicacion" name="ubicacion" required>
+                <button type="button" id="get-location">Obtener Ubicación</button>
             </div>
 
-            <div class="form-group">
-                <label for="estado">Estado del Paquete:</label>
-                <input type="text" id="estado" name="estado" required>
-            </div>
 
             <div class="form-group">
                 <label for="observaciones">Observaciones:</label>
@@ -140,5 +137,23 @@
         
         <a class="back-link" href="{% url 'listar_rastreos' %}">Volver a la lista de rastreos</a>
     </div>
+
+    <script>
+        document.getElementById('get-location').addEventListener('click', function() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const lat = position.coords.latitude;
+                    const long = position.coords.longitude;
+                    
+                    // Aquí puedes usar una API de geocodificación para obtener la dirección real en lugar de solo coordenadas
+                    document.getElementById('ubicacion').value = `Lat: ${lat}, Long: ${long}`;
+                }, function() {
+                    alert("No se pudo obtener la ubicación.");
+                });
+            } else {
+                alert("Geolocalización no es soportada por este navegador.");
+            }
+        });
+    </script>
 </body>
 </html>

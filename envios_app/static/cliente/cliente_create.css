@@ -1,0 +1,232 @@
+/* General body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Header styling */
+header {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 10; /* Ensure the header is above other elements */
+}
+
+/* Hamburger menu styling */
+.hamburger-menu {
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 20; /* Make sure it’s above the content */
+}
+
+.hamburger-menu div {
+    width: 30px;
+    height: 4px;
+    background-color: white;
+    margin: 5px 0;
+    transition: 0.4s;
+}
+
+/* Navigation styling */
+nav {
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex; /* Show links in a row by default */
+}
+
+ul li {
+    margin-right: 20px; /* Space between menu items */
+}
+
+ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    padding: 10px 15px;
+    display: inline-block;
+}
+
+ul li a:hover {
+    background-color: #0056b3;
+    border-radius: 5px;
+}
+
+/* Responsive Hamburger Menu */
+@media (max-width: 768px) {
+    .hamburger-menu {
+        display: flex; /* Show the hamburger menu */
+    }
+
+    /* Hide menu links initially */
+    ul {
+        display: none; /* Hidden by default */
+        flex-direction: column; /* Vertical layout */
+        position: absolute;
+        top: 60px; /* Adjust this based on your header height */
+        right: 0;
+        background-color: #007BFF;
+        width: 100%; /* Full width */
+        text-align: center; /* Center align text */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+    }
+
+    /* Show menu when toggle is active */
+    ul.show {
+        display: flex; /* Display the menu */
+    }
+
+    /* Spacing between items */
+    ul li {
+        margin: 10px 0; /* Space between items */
+    }
+}
+
+/* Content styling */
+.content {
+    padding: 40px 20px; /* Added padding for better spacing */
+    text-align: center;
+}
+
+/* Form container */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between inputs */
+    background-color: #ffffff;
+    padding: 25px 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto; /* Center the form */
+    width: 300px; /* Set a fixed width */
+}
+
+/* Form heading */
+.content h1 {
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+/* Label styling */
+label {
+    color: #555;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Input fields styling */
+input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+/* Input focus effect */
+input[type="text"]:focus {
+    border-color: #007bff;
+}
+
+/* Submit button styling */
+button[type="submit"] {
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Link styling */
+a {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+/* Footer */
+footer {
+    background-color: #007BFF;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    z-index: 5;
+}
+
+/* Iconos personalizados para el menú */
+.menu-links li:nth-child(1) a::before {
+    content: "";
+    margin-right: 10px;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url('https://img.icons8.com/ios-filled/50/ffffff/home.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.menu-links li:nth-child(2) a::before {
+    content: "";
+    margin-right: 10px;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url('https://img.icons8.com/ios-filled/50/ffffff/delivery.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.menu-links li:nth-child(3) a::before {
+    content: "";
+    margin-right: 10px;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url('https://img.icons8.com/ios-filled/50/ffffff/packaging.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.menu-links li:nth-child(4) a::before {
+    content: "";
+    margin-right: 10px;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url('https://img.icons8.com/ios-filled/50/ffffff/contacts.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}

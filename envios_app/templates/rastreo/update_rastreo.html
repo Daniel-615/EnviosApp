@@ -113,18 +113,25 @@
 
             <div class="form-group">
                 <label for="estado">Estado del Paquete:</label>
-                <input type="text" id="estado" name="estado" value="{{ rastreo.estado_paquete }}" required>
-            </div>
-
-            <div class="form-group">
-                <label for="observaciones">Observaciones:</label>
-                <textarea id="observaciones" name="observaciones">{{ rastreo.observaciones }}</textarea>
+                <select id="estado" name="estado" required>
+                    {% if rastreo.estado_paquete == "en_transito" %}
+                        <option value="en_almacen">En almacén</option>
+                    {% elif rastreo.estado_paquete == "en_almacen" %}
+                        <option value="entregado">Entregado</option>
+                    {% elif rastreo.estado_paquete == "entregado" %}
+                        <option value="finalizado">Finalizado</option>
+                    {% elif rastreo.estado_paquete == "demorado" %}
+                        <option value="cancelado">Cancelado</option>
+                    {% else %}
+                        <option value="{{ rastreo.estado_paquete }}">{{ rastreo.estado_paquete }}</option>
+                    {% endif %}
+                </select>
             </div>
 
             <button type="submit">Actualizar Rastreo</button>
         </form>
         
-        <a class="back-link" href="{% url 'listar_rastreo' %}">Volver a la lista de rastreos</a>
+        <a class="back-link" href="{% url 'listar_rastreos' %}">Volver a la lista de rastreos</a>
     </div>
 </body>
 </html>

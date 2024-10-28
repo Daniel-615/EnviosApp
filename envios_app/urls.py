@@ -53,5 +53,5 @@ urlpatterns = [
 
     path('clientes/listar/',listar_clientes,name='listar_clientes'),
     path('clientes/crear/',crear_cliente,name='crear_cliente'),
-    path('clientes/editar/<uuid:cliente_id>/',actualizar_cliente,name='actualizar_cliente'),
+    path('clientes/editar/<uuid:id_cliente>/',actualizar_cliente,name='actualizar_cliente'),
 ]

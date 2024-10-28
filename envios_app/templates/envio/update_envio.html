@@ -14,7 +14,17 @@
         {% csrf_token %}
         
         <label for="estado">Estado del Envío:</label>
-        <input type="text" id="estado" name="estado" value="{{ envio.estado_envio }}" required>
+        <select id="estado" name="estado" required>
+            {% if envio.estado_envio == "pendiente" %}
+                <option value="En tránsito">En tránsito</option>
+            {% elif envio.estado_envio == "En tránsito" %}
+                <option value="Entregado">Entregado</option>
+            {% elif envio.estado_envio == "Entregado" %}
+                <option value="Finalizado">Finalizado</option>
+            {% else %}
+                <option value="{{ envio.estado_envio }}">{{ envio.estado_envio }}</option>
+            {% endif %}
+        </select>
 
         <button type="submit">Actualizar Envío</button>
     </form>

@@ -151,7 +151,6 @@
                     <td>{{ rastreo.observaciones }}</td>
                     <td class="table-actions">
                         <a href="{% url 'actualizar_rastreo' rastreo.id_rastreo %}">Actualizar</a>
-                        <a href="{% url 'eliminar_rastreo' rastreo.id_rastreo %}" onclick="return confirm('¿Estás seguro de que deseas eliminar este rastreo?');">Eliminar</a>
                     </td>
                 </tr>
                 {% empty %}
