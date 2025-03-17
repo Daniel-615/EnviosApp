@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Transportista</title>
+    {%load static%}
+    <link rel="stylesheet" href="{%static 'transportista/create.css'%}">
+</head>
+<body>
+    <div class="container">
+        <h1>Crear Transportista</h1>
+
+        <div class="messages">
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+
+        <form method="POST">
+            {% csrf_token %}
+            <label for="nombre">Nombre:</label>
+            <input type="text" name="nombre" id="nombre" placeholder="Ingrese el nombre del transportista" required>
+
+            <label for="apellido">Apellido:</label>
+            <input type="text" name="apellido" id="apellido" placeholder="Ingrese el apellido del transportista" required>
+
+            <label for="dpi">DPI:</label>
+            <input type="text" name="dpi" id="dpi" placeholder="Ingrese el DPI del transportista" required>
+
+            <label for="licencia">Licencia:</label>
+            <input type="text" name="licencia" id="licencia" placeholder="Ingrese el número de licencia" required>
+
+            <label for="correo">Correo Electrónico:</label>
+            <input type="email" name="correo" id="correo" placeholder="Ingrese el correo electrónico" required>
+
+            <label for="telefono">Teléfono:</label>
+            <input type="tel" name="telefono" id="telefono" placeholder="Ingrese el número de teléfono" required>
+
+            <button type="submit">Crear Transportista</button>
+        </form>
+
+        <a class="back-link" href="{% url 'listar_transportistas' %}">Volver al listado</a>
+    </div>
+</body>
+</html>

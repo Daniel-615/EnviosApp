@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar Rastreo</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'rastreo/update.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Actualizar Rastreo</h1>
+        
+        {% if messages %}
+        <div class="messages">
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="ubicacion">Ubicación Actual:</label>
+                <input type="text" id="ubicacion" name="ubicacion" value="{{ rastreo.ubicacion_actual }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="estado">Estado del Paquete:</label>
+                <select id="estado" name="estado" required>
+                    {% if rastreo.estado_paquete == "en_transito" %}
+                        <option value="en_almacen">En almacén</option>
+                    {% elif rastreo.estado_paquete == "en_almacen" %}
+                        <option value="entregado">Entregado</option>
+                    {% elif rastreo.estado_paquete == "entregado" %}
+                        <option value="finalizado">Finalizado</option>
+                    {% elif rastreo.estado_paquete == "demorado" %}
+                        <option value="cancelado">Cancelado</option>
+                    {% else %}
+                        <option value="{{ rastreo.estado_paquete }}">{{ rastreo.estado_paquete }}</option>
+                    {% endif %}
+                </select>
+            </div>
+
+            <button type="submit">Actualizar Rastreo</button>
+        </form>
+        
+        <a class="back-link" href="{% url 'listar_rastreos' %}">Volver a la lista de rastreos</a>
+    </div>
+</body>
+</html>

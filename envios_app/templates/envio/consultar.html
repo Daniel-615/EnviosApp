@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Envío por Código de Rastreo</title>
+    {%load static%}
+    <link rel="stylesheet" href="{%static 'envio/consultar.css'%}">
+</head>
+<body>
+
+<div class="search-container">
+    <h2>Buscar Envío</h2>
+    <form method="POST">
+        <input type="text" name="codigo" placeholder="Ingrese el código de rastreo" required>
+        <button type="submit">Buscar</button>
+    </form>
+</div>
+
+</body>
+</html>

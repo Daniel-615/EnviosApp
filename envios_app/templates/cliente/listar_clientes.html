@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Clientes</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'cliente/cliente_listar.css' %}">
+<body>
+
+<header>
+    <h1>Envíos Express</h1>
+    <nav>
+        <div class="hamburger-menu" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <ul class="menu-links">
+            <li><a href="{% url 'home' %}">Inicio</a></li>
+            <li><a href="{% url 'listar_transportistas' %}">Transportistas</a></li>
+            <li><a href="{%url 'listar_paquetes'%}">Paquetes</a></li>
+            <li><a href="{%url 'contactos'%}">Contactos</a></li>
+        </ul>
+    </nav>
+</header>
+
+<h2>Lista de Clientes</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Teléfono</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for cliente in clientes %}
+        <tr>
+            <td>{{ cliente.nombre }}</td>
+            <td>{{ cliente.telefono }}</td>
+            <td>
+                <a href="{% url 'actualizar_cliente' cliente.id_cliente %}">Editar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="bootstrap-btn">
+    <a href="{% url 'crear_cliente' %}" class="crear-cliente-btn">Crear Cliente</a>
+</div>
+
+<script>
+    function toggleMenu() {
+        var menu = document.querySelector('.menu-links');
+        menu.classList.toggle('show');
+    }
+</script>
+
+</body>
+</html>

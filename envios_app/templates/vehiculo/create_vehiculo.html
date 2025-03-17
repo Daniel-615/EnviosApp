@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Vehículo</title>
+    {% load static %}
+    <link rel="stylesheet" href="{%static 'vehiculo/create.css'%}">
+</head>
+<body>
+    <div class="container">
+        <div class="header-icon">
+            <img src="https://image.shutterstock.com/image-vector/truck-delivery-icon-260nw-626524004.jpg" alt="Ícono de Vehículo">
+        </div>
+        <h1>Crear Vehículo</h1>
+        
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-section">
+                <label for="matricula">Matrícula:</label>
+                <input type="text" name="matricula" id="matricula" placeholder="Ej: ABC1234" required>
+            </div>
+
+            <div class="form-section">
+                <label for="marca">Marca:</label>
+                <input type="text" name="marca" id="marca" placeholder="Ej: Toyota" required>
+            </div>
+
+            <div class="form-section">
+                <label for="modelo">Modelo:</label>
+                <input type="text" name="modelo" id="modelo" placeholder="Ej: Hilux 2022" required>
+            </div>
+
+            <button type="submit">Crear Vehículo</button>
+        </form>
+
+        <a class="back-link" href="{% url 'listar_vehiculos' %}">Volver al listado</a>
+    </div>
+</body>
+</html>

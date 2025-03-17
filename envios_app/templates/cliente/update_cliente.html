@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Actualizar Cliente</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'cliente/cliente_update.css' %}">
+</head>
+<body>
+    <h1>Actualizar Cliente</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" value="{{ cliente.nombre }}" required>
+
+        <label for="telefono">Teléfono:</label>
+        <input type="text" id="telefono" name="telefono" value="{{ cliente.telefono }}" required>
+
+        <button type="submit">Actualizar</button>
+    </form>
+    <a href="{% url 'listar_clientes' %}">Volver a la lista</a>
+</body>
+</html>

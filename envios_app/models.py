@@ -1,31 +1,23 @@
 from django.db import models
-from django.core.validators import RegexValidator, MinLengthValidator, MaxLengthValidator
 import uuid
 
 class Cliente(models.Model):
     id_cliente = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False
     )
-    remitente = models.CharField(
+    nombre = models.CharField(
         max_length=30, blank=False, null=False
     )
-    telefono_remitente = models.CharField(
+    telefono= models.CharField(
         max_length=20, blank=False, null=False,
-        validators=[RegexValidator(regex=r'^\+?[1-9]\d{1,14}$', message="Número de teléfono inválido")]
-    )
-    destinatario = models.CharField(
-        max_length=30, blank=False, null=False
-    )
-    telefono_destinatario = models.CharField(
-        max_length=20, blank=False, null=False,
-        validators=[RegexValidator(regex=r'^\+?[1-9]\d{1,14}$', message="Número de teléfono inválido")]
     )
     
+    
     class Meta:
-        indexes = [models.Index(fields=['telefono_remitente']), models.Index(fields=['telefono_destinatario'])]
+        indexes = [models.Index(fields=['telefono'])]
 
     def __str__(self):
-        return f'{self.remitente} -> {self.destinatario}'
+        return f'{self.nombre} -> {self.telefono}'
 
 
 class Transportista(models.Model):
@@ -40,20 +32,19 @@ class Transportista(models.Model):
     )
     dpi_transportista = models.CharField(
         max_length=15, blank=False, null=False,
-        validators=[MinLengthValidator(13), MaxLengthValidator(15), RegexValidator(regex=r'^\d+$', message="El DPI debe contener solo números")]
     )
     licencia_transportista = models.CharField(
         max_length=15, blank=False, null=False,
-        validators=[MinLengthValidator(8), MaxLengthValidator(15)]
     )
     correo_transportista = models.EmailField(
         max_length=100, blank=False, null=False
     )
     telefono_transportista = models.CharField(
         max_length=15, blank=False, null=False,
-        validators=[RegexValidator(regex=r'^\+?[1-9]\d{1,14}$', message="Número de teléfono inválido")]
     )
-
+    activo=models.BooleanField(
+        default=True
+    )
     class Meta:
         indexes = [models.Index(fields=['telefono_transportista']), models.Index(fields=['dpi_transportista'])]
 
@@ -74,7 +65,9 @@ class Vehiculo(models.Model):
     modelo_vehiculo = models.CharField(
         max_length=40, blank=False, null=False
     )
-
+    activo=models.BooleanField(
+        default=True
+    )
     def __str__(self):
         return f'vehículo: {self.modelo_vehiculo}'
 
@@ -83,19 +76,21 @@ class AsignacionVehiculoTransportista(models.Model):
     id_asignacion = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False
     )
-    transportista = models.ForeignKey(
+    id_transportista = models.ForeignKey(
         Transportista, on_delete=models.CASCADE, related_name='transportista'
     )
-    vehiculo = models.ForeignKey(
+    id_vehiculo = models.ForeignKey(
         Vehiculo, on_delete=models.CASCADE, related_name='vehiculo'
     )
     fecha_asignacion = models.DateTimeField(auto_now_add=True)
     fecha_fin_asignacion = models.DateTimeField(
         null=True, blank=True
     )
-
+    activo=models.BooleanField(
+        default=True
+    )
     def __str__(self):
-        return f'{self.transportista} asignado a {self.vehiculo} desde {self.fecha_asignacion}'
+        return f'{self.id_transportista} asignado a {self.id_vehiculo} desde {self.fecha_asignacion}'
 
 
 class Ubicacion(models.Model):
@@ -113,14 +108,13 @@ class Ubicacion(models.Model):
     )
     codigo_postal = models.CharField(
         max_length=10, blank=False, null=False,
-        validators=[RegexValidator(regex=r'^\d+$', message="El código postal debe contener solo números")]
     )
     coordenadas_geograficas = models.CharField(
         max_length=255,blank=False,null=False
     )
     referencias = models.TextField(
         blank=False, null=False
-    )  # opcional
+    )  
 
     def __str__(self):
         return f'{self.ciudad}, {self.calle}'
@@ -158,7 +152,7 @@ class Envio(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f'Envío creado {self.codigo_rastreo}'
+        return f'{self.codigo_rastreo}'
 
 
 class Paquete(models.Model):
@@ -180,7 +174,9 @@ class Paquete(models.Model):
     valor_declarado = models.DecimalField(
         max_digits=12, decimal_places=2
     )
-
+    asignado=models.BooleanField(
+        default=False
+    )
     def __str__(self):
         return f"Paquete {self.id_paquete} - {self.descripcion_paquete}"
 
@@ -220,12 +216,11 @@ class Facturacion(models.Model):
     id_cliente = models.ForeignKey(
         Cliente, on_delete=models.CASCADE
     )
-
     def __str__(self):
         return f'Factura {self.id_factura}'
 
 
-class Facturacion_detalle(models.Model):
+class FacturacionDetalle(models.Model):
     id_factura_detalle = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False
     )

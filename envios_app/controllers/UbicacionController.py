@@ -5,4 +5,6 @@ class UbicacionController():
         return Ubicacion.objects.all()
     @staticmethod 
     def obtener_ubicacion_id(id):
-        return Ubicacion.objects.get()
+        return Ubicacion.objects.get(id=id)
+    @staticmethod
+    def crear_ubicacion():

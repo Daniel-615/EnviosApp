@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Inicio - Envios</title>
+    {% load static%}
+    <link rel="stylesheet" href="{%static 'home.css'%}">
+</head>
+<body>
+
+<header>
+    <h1>Envíos Express</h1>
+    <nav>
+        <div class="hamburger-menu" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <ul class="menu-links">
+            <li><a href="{% url 'home' %}">Inicio</a></li>
+            <li class="dropdown">
+                <a href="#">Opciones</a>
+                <div class="dropdown-content">
+                    <a href="{% url 'listar_transportistas' %}">Transportistas</a>
+                    <a href="{% url 'listar_vehiculos' %}">Vehículos</a>
+                    <a href="{% url 'listar_asignaciones' %}">Asignaciones</a>
+                    <a href="{% url 'listar_rastreos' %}">Rastreos</a>
+                    <a href="{% url 'listar_paquetes' %}">Paquetes</a>
+                    <a href="{% url 'listar_envios' %}">Envíos</a>
+                    <a href="{% url 'listar_ubicaciones' %}">Ubicaciones</a>
+                    <a href="{% url 'listar_clientes' %}">Clientes</a>
+                    <a href="{% url 'listar_facturas' %}">Facturas</a>
+                </div>
+            </li>
+            <li><a href="{%url 'contactos'%}">Contactos</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="content">
+    <p>Bienvenido a Envíos Express, su servicio confiable para todos sus envíos.</p>
+    <a href="{%url 'buscar_envio'%}">Consulta Envio</a>
+</div>
+
+<footer>
+    <p>&copy; 2024 Envíos Express. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+    function toggleMenu() {
+        var menu = document.querySelector('.menu-links');
+        menu.classList.toggle('show');
+    }
+</script>
+
+</body>
+</html>

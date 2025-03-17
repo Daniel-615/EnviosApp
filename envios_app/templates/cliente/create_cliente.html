@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cliente</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'cliente/cliente_create.css' %}">
+
+</head>
+<body>
+
+<header>
+    <h1>Envíos Express</h1>
+    <nav>
+        <div class="hamburger-menu" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <ul class="menu-links">
+            <li><a href="{% url 'home' %}">Inicio</a></li>
+            <li><a href="{% url 'listar_transportistas' %}">Transportistas</a></li>
+            <li><a href="{%url 'listar_paquetes'%}">Paquetes</a></li>
+            <li><a href="{%url 'contactos'%}">Contactos</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="content">
+    <h1>Crear Cliente</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <label for="telefono">Teléfono:</label>
+        <input type="text" id="telefono" name="telefono" required>
+
+        <button type="submit">Guardar</button>
+    </form>
+    <a href="{% url 'listar_clientes' %}">Volver a la lista</a>
+</div>
+
+<script>
+    function toggleMenu() {
+        var menu = document.querySelector('.menu-links');
+        menu.classList.toggle('show');
+    }
+</script>
+
+</body>
+</html>

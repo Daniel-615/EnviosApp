@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalles de Factura</title>
+    {% load static%}
+    <link rel="stylesheet" href="{% static 'facturacion_detalle/listar.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Detalles de Factura</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Factura</th>
+                    <th>Monto Total</th>
+                    <th>Método de Pago</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for detalle in detalles %}
+                <tr>
+                    <td>{{ detalle.id_factura.id_factura }}</td>
+                    <td>{{ detalle.monto_total }}</td>
+                    <td>{{ detalle.metodo_pago }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'home' %}">Volver a la lista</a>
+    </div>
+</body>
+</html>

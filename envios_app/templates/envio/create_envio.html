@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Envío</title>
+    {% load static%}
+    <link rel="stylesheet" href="{% static 'envio/envio_create.css' %}">
+</head>
+<body>
+    <h1>Crear Nuevo Envío</h1>
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        <label for="asignacion">Asignación:</label>
+        <select id="asignacion" name="asignacion" required>
+            {% for asignacion in asignaciones %}
+                <option value="{{ asignacion.id_asignacion }}">{{ asignacion.fecha_asignacion }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="ubicacion">Ubicación:</label>
+        <select id="ubicacion" name="ubicacion" required>
+            {% for ubicacion in ubicaciones %}
+                <option value="{{ ubicacion.id_ubicacion }}">{{ ubicacion.calle }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="estado">Estado del Envío:</label>
+        <select id="estado" name="estado" required>
+            {% for key, value in Envio.ESTADO_CHOICES %}
+                <option value="{{ key }}">{{ value }}</option>
+            {% endfor %}
+        </select>
+
+
+        <button type="submit">Crear Envío</button>
+    </form>
+
+    <a href="{% url 'listar_envios' %}" class="button-link">Volver a la Lista</a>
+
+</body>
+</html>

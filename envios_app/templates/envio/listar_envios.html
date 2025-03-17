@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Envíos</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'envio/envio_listar.css' %}">
+</head>
+<body>
+    <h1>Lista de Envíos</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Asignación</th>
+                <th>Ubicación</th>
+                <th>Estado</th>
+                <th>Código de Rastreo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for envio in envios %}
+                <tr>
+                    <td>{{ envio.id }}</td>
+                    <td>{{ envio.id_asignacion }}</td>
+                    <td>{{ envio.id_ubicacion }}</td>
+                    <td>{{ envio.estado_envio }}</td>
+                    <td>{{ envio.codigo_rastreo }}</td>
+                    <td>
+                        <a href="{% url 'actualizar_envio' envio.id_envio %}" class="button">Actualizar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="button-container">
+        <a href="{% url 'crear_envio' %}" class="button">Crear nuevo envío</a>
+    </div>
+    <div class="button-container">
+        <a href="{% url 'home' %}" class="button">Regresar al Inicio</a>
+    </div>
+</body>
+</html>

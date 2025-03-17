@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Factura</title>
+    {% load static%}
+    <link rel="stylesheet" href="{% static 'facturacion/create.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Crear Factura</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="cliente">Cliente:</label>
+            <select id="cliente" name="cliente" required>
+                <option value="" disabled selected>Seleccione un cliente</option>
+                {% for cliente in clientes %}
+                    <option value="{{ cliente.id_cliente }}">{{ cliente.nombre }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Guardar</button>
+        </form>
+        <a href="{% url 'listar_facturas' %}">Volver a la lista</a>
+    </div>
+</body>
+</html>

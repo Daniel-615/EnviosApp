@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar Transportista</title>
+    {%load static%}
+    <link rel="stylesheet" href="{%static 'transportista/update.css'%}">
+</head>
+<body>
+    <div class="container">
+        <h1>Actualizar Transportista</h1>
+        
+        <form method="POST">
+            {% csrf_token %}
+            <label for="nombre">Nombre:</label>
+            <input type="text" name="nombre" id="nombre" value="{{ transportista.nombre_transportista }}" required aria-label="Nombre del Transportista">
+
+            <label for="apellido">Apellido:</label>
+            <input type="text" name="apellido" id="apellido" value="{{ transportista.apellido_transportista }}" required aria-label="Apellido del Transportista">
+
+            <label for="dpi">DPI:</label>
+            <input type="text" name="dpi" id="dpi" value="{{ transportista.dpi_transportista }}" required aria-label="DPI del Transportista">
+
+            <label for="licencia">Licencia:</label>
+            <input type="text" name="licencia" id="licencia" value="{{ transportista.licencia_transportista }}" required aria-label="Licencia del Transportista">
+
+            <label for="correo">Correo Electrónico:</label>
+            <input type="email" name="correo" id="correo" value="{{ transportista.correo_transportista }}" required aria-label="Correo Electrónico del Transportista">
+
+            <label for="telefono">Teléfono:</label>
+            <input type="text" name="telefono" id="telefono" value="{{ transportista.telefono_transportista }}" required aria-label="Teléfono del Transportista">
+
+            <button type="submit">Actualizar Transportista</button>
+        </form>
+
+        <a class="back-link" href="{% url 'listar_transportistas' %}">Volver al listado</a>
+    </div>
+</body>
+</html>

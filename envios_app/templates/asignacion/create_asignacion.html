@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Asignación</title>
+    {% load static%}
+    <link rel="stylesheet" href="{% static 'asignacion/create.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Crear Asignación</h1>
+        
+        <form method="POST">
+            {% csrf_token %}
+            
+            <!-- Transportista -->
+            <div class="select-search">
+                <label for="transportista">Transportista:</label>
+                <select name="transportista" id="transportista" required>
+                    <option value="" disabled selected>Selecciona un transportista...</option>
+                    {% for transportista in transportistas %}
+                        <option value="{{ transportista.id_transportista }}">{{ transportista.nombre_transportista }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <!-- Vehículo -->
+            <div class="select-search">
+                <label for="vehiculo">Vehículo:</label>
+                <select name="vehiculo" id="vehiculo" required>
+                    <option value="" disabled selected>Selecciona un vehículo...</option>
+                    {% for vehiculo in vehiculos %}
+                        <option value="{{ vehiculo.id_vehiculo }}">{{ vehiculo.modelo_vehiculo }} - {{ vehiculo.placa_vehiculo }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Fecha de fin de asignación -->
+            <label for="fecha_fin">Fecha Fin de Asignación:</label>
+            <input type="date" name="fecha_fin" id="fecha_fin" required>
+            
+            <!-- Botón para crear la asignación -->
+            <button type="submit">Crear Asignación</button>
+        </form>
+    </div>
+</body>
+</html>

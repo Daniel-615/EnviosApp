@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar Ubicación</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ubicacion/ubicacion_update.css' %}">
+</head>
+<body>
+    <h1>Actualizar Ubicación</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label for="referencias">Referencias:</label>
+        <input type="text" id="referencias" name="referencias" value="{{ ubicacion.referencias }}" required>
+
+        <button type="submit">Actualizar Ubicación</button>
+    </form>
+
+    <a href="{% url 'listar_ubicaciones' %}" class="button">Volver a la Lista</a>
+</body>
+</html>
