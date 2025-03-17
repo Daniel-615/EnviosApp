@@ -18,7 +18,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG =True
 
 
-ALLOWED_HOSTS = ["https://enviosapp.onrender.com"]
+ALLOWED_HOSTS = ["enviosapp.onrender.com"]
 
 #HTTPS
 SECURE_SSL_REDIRECT = True
