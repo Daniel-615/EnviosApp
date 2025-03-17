@@ -76,10 +76,10 @@ WSGI_APPLICATION = 'envios.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': os.getenv('DATABASE_ENGINE'),
-        'NAME': "envios_e4kv",
+        'NAME': os.getenv('DATABASE_NAME'),
         'USER': os.getenv('DATABASE_USER'),
-        'PASSWORD': "M1mmhP7lD1fGfHZy9jvAnB5zDh8tNblF",
-        'HOST': "dpg-csd0d75umphs739augog-a.oregon-postgres.render.com",
+        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+        'HOST': os.getenv('DATABASE_HOST'),
         'PORT': os.getenv('DATABASE_PORT'),
     }
 }
